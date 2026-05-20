@@ -1,3 +1,4 @@
+import json
 import logging
 from pathlib import Path
 
@@ -24,24 +25,25 @@ def get_html_source(filename: str) -> Path:
         logger.error(error_msg)
         raise MissingParserSourceError(error_msg)
 
+    logger.info(f"Znaleziono plik źródłowy do parsowania: {input_path.name}")
     return input_path
 
 
 def get_date(soup: BeautifulSoup) -> str:
-    data_header = soup.find("h2")
-    if data_header:
-        return str(data_header.text).split(" ")[1]
+    date_header = soup.find("h2")
+    if date_header:
+        return str(date_header.text).split(" ")[1]
     return "Brak daty"
 
 
 def get_replacements(soup: BeautifulSoup) -> dict:
     rows = soup.find_all("tr")
-    data = [row.find_all("td") for row in rows]
+    rows_data = [row.find_all("td") for row in rows]
 
-    del data[:2]
+    del rows_data[:2]
 
     replacements = {}
-    for row in data:
+    for row in rows_data:
         if len(row) < 6:
             continue
 
@@ -56,19 +58,31 @@ def get_replacements(soup: BeautifulSoup) -> dict:
     return replacements
 
 
+def save_to_json(schedule_date: str, replacements_data: dict, output_path: str = "replacements.json") -> None:
+    """Zapisuje sparsowaną datę i zastępstwa do pliku JSON."""
+    data_to_export = {"date": schedule_date, "replacements": replacements_data}
+
+    with open(output_path, "w", encoding="utf-8") as json_file:
+        json.dump(data_to_export, json_file, ensure_ascii=False, indent=4)
+
+    logger.info(f"Pomyślnie zapisano dane do pliku: {output_path}")
+
+
 def main():
     try:
         input_path = get_html_source(FILENAME)
     except MissingParserSourceError:
         return None
 
-    with open(input_path, encoding="utf-8") as f:
-        soup = BeautifulSoup(f.read(), "lxml")
+    with open(input_path, encoding="utf-8") as html_file:
+        soup = BeautifulSoup(html_file.read(), "lxml")
 
-    zastepstwa_data = get_replacements(soup)
-    data_zastepstw = get_date(soup)
+    replacements_data = get_replacements(soup)
+    schedule_date = get_date(soup)
 
-    return data_zastepstw, zastepstwa_data
+    logger.info(f"Pomyślnie sparsowano zastępstwa. Data: {schedule_date}, liczba nauczycieli: {len(replacements_data)}")
+
+    return schedule_date, replacements_data
 
 
 if __name__ == "__main__":
@@ -79,4 +93,5 @@ if __name__ == "__main__":
     if result:
         parsed_date, parsed_replacements = result
         print(f"Data: {parsed_date}")
-        print(parsed_replacements)
+
+        save_to_json(parsed_date, parsed_replacements)
