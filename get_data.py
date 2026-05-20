@@ -5,7 +5,7 @@ FILENAME = "Zastępstwa.html"
 
 def main():
     with open(FILENAME, encoding="utf-8") as f:
-        soup = BeautifulSoup(f.read(), "html.parser")
+        soup = BeautifulSoup(f.read(), "lxml")
     # print(soup)
     rows = soup.find_all("tr")
     data = [row.find_all("td") for row in rows]
@@ -26,7 +26,7 @@ def main():
 
 def date():
     with open(FILENAME, encoding="utf-8") as f:  # Zastępstwa.html in main folder
-        soup = BeautifulSoup(f.read(), "html.parser")
+        soup = BeautifulSoup(f.read(), "lxml")
 
     # it looks for <h2>Okres: 26.11.2019 (wt.) - 26.11.2019 (wt.)</h2> and takes date from it
     data = soup.find("h2")
