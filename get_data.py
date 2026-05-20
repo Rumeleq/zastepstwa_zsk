@@ -46,7 +46,7 @@ def get_replacements(soup: BeautifulSoup) -> dict:
             continue
 
         lesson_info = [col.text.strip() for col in row]
-        teacher = lesson_info.pop(5)
+        teacher = lesson_info.pop(5)  # copy the substitute teacher, remove them from lesson info
 
         if teacher not in replacements:
             replacements[teacher] = [lesson_info]
