@@ -4,9 +4,9 @@ FILENAME = "Zastępstwa.html"
 
 
 def main():
-    with open(FILENAME, "r", encoding="utf-8") as f:
+    with open(FILENAME, encoding="utf-8") as f:
         soup = BeautifulSoup(f.read(), "html.parser")
-    #print(soup)
+    # print(soup)
     rows = soup.find_all("tr")
     data = [row.find_all("td") for row in rows]
 
@@ -16,9 +16,7 @@ def main():
 
     for row in data:
         lesson_info = [col.text for col in row]
-        teacher = lesson_info.pop(
-            5
-        ).strip()  # it takes 5th element (substitute teacher) of the list and then deletes it
+        teacher = lesson_info.pop(5).strip()  # it takes 5th element (substitute teacher) of the list and then deletes it
         if teacher not in replacements:
             replacements[teacher] = [lesson_info]
         else:
@@ -27,7 +25,7 @@ def main():
 
 
 def date():
-    with open(FILENAME, "r", encoding="utf-8") as f:  # Zastępstwa.html in main folder
+    with open(FILENAME, encoding="utf-8") as f:  # Zastępstwa.html in main folder
         soup = BeautifulSoup(f.read(), "html.parser")
 
     # it looks for <h2>Okres: 26.11.2019 (wt.) - 26.11.2019 (wt.)</h2> and takes date from it
