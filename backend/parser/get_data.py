@@ -4,7 +4,7 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
-from settings import VULCAN_SCHEDULE_HTML_FILENAME as FILENAME
+from settings import VULCAN_SCHEDULE_HTML_FILENAME as FILENAME, BASE_DIR
 from settings import setup_logging
 
 logger = logging.getLogger(__name__)
@@ -17,7 +17,7 @@ class MissingParserSourceError(FileNotFoundError):
 
 
 def get_html_source(filename: str) -> Path:
-    target_path = Path(__file__).parent.parent / "data" / filename
+    target_path = BASE_DIR / "data" / filename
     input_path = target_path if target_path.is_file() else next(target_path.parent.glob("*.html"), None)
 
     if input_path is None:
