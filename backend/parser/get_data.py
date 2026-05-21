@@ -58,9 +58,10 @@ def get_replacements(soup: BeautifulSoup) -> dict:
     return replacements
 
 
-def save_to_json(schedule_date: str, replacements_data: dict, output_path: str = "replacements.json") -> None:
+def save_to_json(schedule_date: str, replacements_data: dict, output_filename: str = "replacements.json") -> None:
     """Zapisuje sparsowaną datę i zastępstwa do pliku JSON."""
     data_to_export = {"date": schedule_date, "replacements": replacements_data}
+    output_path = BASE_DIR / "data" / output_filename
 
     with open(output_path, "w", encoding="utf-8") as json_file:
         json.dump(data_to_export, json_file, ensure_ascii=False, indent=4)
