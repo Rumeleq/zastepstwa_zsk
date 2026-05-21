@@ -1,7 +1,7 @@
 import logging.config
 from pathlib import Path
 
-BASE_DIR = Path(__file__).parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 LOG_DIR = BASE_DIR / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 VULCAN_SCHEDULE_HTML_FILENAME = "Zastępstwa.html"

@@ -17,11 +17,11 @@ class MissingParserSourceError(FileNotFoundError):
 
 
 def get_html_source(filename: str) -> Path:
-    target_path = Path(filename)
-    input_path = target_path if target_path.is_file() else next(Path().glob("*.html"), None)
+    target_path = Path(__file__).parent.parent / "data" / filename
+    input_path = target_path if target_path.is_file() else next(target_path.parent.glob("*.html"), None)
 
     if input_path is None:
-        error_msg = f"Brak pliku! Nie znaleziono '{filename}', ani żadnego pliku *.html w: {Path().absolute()}"
+        error_msg = f"Brak pliku! Nie znaleziono '{filename}', ani żadnego pliku *.html w: {target_path.parent}"
         logger.error(error_msg)
         raise MissingParserSourceError(error_msg)
 
@@ -92,6 +92,4 @@ if __name__ == "__main__":
 
     if result:
         parsed_date, parsed_replacements = result
-        print(f"Data: {parsed_date}")
-
         save_to_json(parsed_date, parsed_replacements)
