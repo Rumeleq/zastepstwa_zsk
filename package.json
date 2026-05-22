@@ -1,0 +1,11 @@
+{
+  "name": "zastepstwa_zsk",
+  "lockfileVersion": 3,
+  "requires": true,
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend/api"
+  ],
+  "packages": {}
+}
