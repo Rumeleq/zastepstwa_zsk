@@ -1,0 +1,40 @@
+import axios from "axios"
+
+const apiClient = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api",
+  timeout: 10000,
+  headers: {
+    "Content-Type": "application/json",
+  },
+})
+
+interface Replacement {
+  lesson: string
+  teacherOrStatus: string
+  className: string
+  subject: string
+  room: string
+  comments: string
+}
+
+export const getReplacements = async () => {
+  const res = await apiClient.get("/replacements")
+  const data = res.data
+  const date: string = data.date
+  const replacements: Record<string, Array<Replacement>> = {}
+  for (const [teacherName, rows] of Object.entries(data.replacements)) {
+    replacements[teacherName] = (rows as string[][]).map((row) => ({
+      lesson: row[0],
+      teacherOrStatus: row[1],
+      className: row[2],
+      subject: row[3],
+      room: row[4],
+      comments: row[5],
+    }))
+  }
+
+  return {
+    date: date,
+    replacements: replacements,
+  }
+}
