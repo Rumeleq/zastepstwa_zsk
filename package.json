@@ -7,5 +7,13 @@
     "frontend",
     "backend/api"
   ],
-  "packages": {}
+  "packages": {},
+  "scripts": {
+    "format": "prettier --write .",
+    "dev": "concurrently -k -i \"npm run dev -w frontend\" \"npm run dev -w backend/api\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "prettier": "^3.8.3"
+  }
 }
