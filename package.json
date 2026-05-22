@@ -10,7 +10,9 @@
   "packages": {},
   "scripts": {
     "format": "prettier --write .",
-    "dev": "concurrently -k -i \"npm run dev -w frontend\" \"npm run dev -w backend/api\""
+    "dev": "concurrently -k -i \"npm run dev -w frontend\" \"npm run dev -w backend/api\"",
+    "frontend": "npm run dev -w frontend",
+    "api": "npm run dev -w backend/api"
   },
   "devDependencies": {
     "concurrently": "^9.2.1",
