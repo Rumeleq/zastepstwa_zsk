@@ -1,5 +1,5 @@
 import zskLogo from "@assets/logo-zsk.svg"
-import {useGlobalData} from "@hooks"
+import { useGlobalData } from "@hooks"
 import "./Header.scss"
 
 export function Header() {
@@ -7,14 +7,18 @@ export function Header() {
 
   return (
     <header>
-      <div id="logo">
+      <div className="logo">
         <img src={zskLogo} alt="Logo ZSK" />
         <h1>Zastępstwa</h1>
       </div>
-      <div id="date">
-        {isLoading && <p>Pobieranie danych...</p>}
-        {isError && <p className="error">Błąd: {error.message}</p>}
-        {!isLoading && !isError && <p>{data?.date}</p>}
+      <div className="date">
+        {isLoading ? (
+          <p>Pobieranie danych...</p>
+        ) : isError ? (
+          <p className="error">Błąd: {error?.message}</p>
+        ) : (
+          <p>{data?.date}</p>
+        )}
       </div>
     </header>
   )

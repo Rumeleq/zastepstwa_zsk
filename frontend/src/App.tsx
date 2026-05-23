@@ -1,6 +1,6 @@
 import "./App.css"
 import { useGlobalData } from "@hooks"
-import { Header } from "@components";
+import { Header } from "@components"
 
 function App() {
   const { data, isLoading, isError, error } = useGlobalData()
