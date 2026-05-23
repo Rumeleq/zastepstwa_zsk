@@ -1,1 +1,1 @@
-export * from "./requests.ts"
+export * from "@services/requests"

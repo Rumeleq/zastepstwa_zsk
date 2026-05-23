@@ -1,1 +1,1 @@
-export * from "./useGlobalData.ts"
+export * from "@hooks/useGlobalData"

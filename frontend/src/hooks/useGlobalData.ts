@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { getReplacements } from "../services"
+import { getReplacements } from "@services"
 
 export function useGlobalData() {
   return useQuery({

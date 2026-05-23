@@ -1,5 +1,6 @@
 import "./App.css"
-import { useGlobalData } from "./hooks"
+import { useGlobalData } from "@hooks"
+import { Header } from "@components";
 
 function App() {
   const { data, isLoading, isError, error } = useGlobalData()
@@ -17,11 +18,10 @@ function App() {
 
   return (
     <>
+      <Header />
       <div>
         <h1>Zastępstwa (Raw Data)</h1>
-        <pre>
-          {JSON.stringify(data, null, 2)}
-        </pre>
+        <pre>{JSON.stringify(data, null, 2)}</pre>
       </div>
     </>
   )
