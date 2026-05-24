@@ -55,7 +55,10 @@ function App() {
         return (
           <TeacherSubstitutions
             onSwitch={() => setCurrentView(View.All)}
-            onChangeTeacher={() => {setSelectedTeacher(null); setCurrentView(View.TeacherSelection)}}
+            onChangeTeacher={() => {
+              setSelectedTeacher(null)
+              setCurrentView(View.TeacherSelection)
+            }}
             teacherName={selectedTeacher}
           />
         )
