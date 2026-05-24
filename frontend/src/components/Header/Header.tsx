@@ -13,11 +13,11 @@ export function Header() {
       </div>
       <div className="date">
         {isLoading ? (
-          <p>Pobieranie danych...</p>
+          <h1>Pobieranie danych...</h1>
         ) : isError ? (
-          <p className="error">Błąd: {error?.message}</p>
+          <h1 className="error">Błąd: {error?.message}</h1>
         ) : (
-          <p>{data?.date}</p>
+          <h1>{data?.date}</h1>
         )}
       </div>
     </header>
