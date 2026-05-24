@@ -17,6 +17,8 @@
       "@components": ["src/components"],
       "@hooks": ["src/hooks"],
       "@services": ["src/services"],
+      "@views/*": ["src/views/*"],
+      "@views": ["src/views"],
       "@": ["src"]
     },
 

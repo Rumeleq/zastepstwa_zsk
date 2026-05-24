@@ -1,28 +1,71 @@
 import "./App.css"
 import { useGlobalData } from "@hooks"
 import { Header } from "@components"
+import {
+  AllSubstitutions,
+  TeacherSubstitutions,
+  TeacherSelection,
+} from "@views"
+import { useState } from "react"
+
+const View = {
+  All: "all",
+  TeacherSelection: "teacherSelection",
+  TeacherSubstitutions: "teacherSubstitutions",
+} as const
+
+type ViewType = (typeof View)[keyof typeof View]
 
 function App() {
   const { data, isLoading, isError, error } = useGlobalData()
-  if (isLoading) {
-    return <div>Ładowanie danych...</div>
+  const [currentView, setCurrentView] = useState<ViewType | null>(View.All)
+  const [selectedTeacher, setSelectedTeacher] = useState<string | null>(null)
+
+  const handleTeacherSelection = (name: string) => {
+    setSelectedTeacher(name)
+    setCurrentView(View.TeacherSubstitutions)
   }
-  if (isError) {
-    return (
-      <div>
-        Błąd podczas pobierania danych:{" "}
-        {error instanceof Error ? error.message : "Nieznany błąd"}
-      </div>
-    )
+
+  function renderView() {
+    if (isLoading) return <p>Pobieranie danych...</p>
+    if (isError) return <p className="error">Błąd: {error?.message}</p>
+    if (!data) return null
+
+    switch (currentView) {
+      case View.All:
+        return (
+          <AllSubstitutions
+            onSwitch={() => {
+              if (selectedTeacher) {
+                setCurrentView(View.TeacherSubstitutions)
+              } else {
+                setCurrentView(View.TeacherSelection)
+              }
+            }}
+          />
+        )
+      case View.TeacherSelection:
+        return (
+          <TeacherSelection
+            onSwitch={() => setCurrentView(View.All)}
+            onSelectTeacher={handleTeacherSelection}
+          />
+        )
+      case View.TeacherSubstitutions:
+        return (
+          <TeacherSubstitutions
+            onSwitch={() => setCurrentView(View.All)}
+            onChangeTeacher={() => {setSelectedTeacher(null); setCurrentView(View.TeacherSelection)}}
+            teacherName={selectedTeacher}
+          />
+        )
+    }
   }
 
   return (
     <>
       <Header />
-      <div>
-        <h1>Zastępstwa (Raw Data)</h1>
-        <pre>{JSON.stringify(data, null, 2)}</pre>
-      </div>
+      {renderView()}
     </>
   )
 }
