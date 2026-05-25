@@ -30,6 +30,7 @@ const accessLogStream = fs.createWriteStream(
   { flags: "a" },
 )
 
+app.set("trust proxy", 1)
 app.use(limiter)
 app.use(morgan("combined", { stream: accessLogStream }))
 app.use(morgan("dev"))
