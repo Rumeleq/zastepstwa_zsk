@@ -3,9 +3,8 @@ import logging
 from pathlib import Path
 
 from bs4 import BeautifulSoup
-
-from settings import VULCAN_SCHEDULE_HTML_FILENAME as FILENAME, BASE_DIR
-from settings import setup_logging
+from settings import BASE_DIR, setup_logging
+from settings import VULCAN_SCHEDULE_HTML_FILENAME as FILENAME
 
 logger = logging.getLogger(__name__)
 
