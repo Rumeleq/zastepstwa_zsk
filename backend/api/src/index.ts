@@ -3,6 +3,7 @@ import express, { Request, Response, NextFunction } from "express"
 import cors from "cors"
 import fs from "fs"
 import path from "path"
+import { processAndSaveReplacements } from "./parser"
 
 import { logger } from "./logger"
 import { limiter, authenticateApiKey, errorHandler } from "./middlewares"
@@ -76,6 +77,8 @@ app.post(
       logger.info(
         `Otrzymano i zapisano nowy plik HTML zastępstw z IP: ${req.ip} (Rozmiar: ${htmlData.length} bajtów)`,
       )
+
+      await processAndSaveReplacements(htmlData)
 
       res.status(200).json({
         message:
