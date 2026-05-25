@@ -10,6 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 LOG_DIR = BASE_DIR / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 VULCAN_SCHEDULE_HTML_FILENAME = os.environ.get("VULCAN_SCHEDULE_HTML_FILENAME", "Zastępstwa.html")
+REPLACEMENTS_FILENAME = os.environ.get("REPLACEMENTS_FILENAME", "replacements.json")
 
 LOGGING_CONFIG = {
     "version": 1,

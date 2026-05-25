@@ -4,7 +4,8 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 from settings import BASE_DIR, setup_logging
-from settings import VULCAN_SCHEDULE_HTML_FILENAME as FILENAME
+from settings import REPLACEMENTS_FILENAME as OUTPUT_FILENAME
+from settings import VULCAN_SCHEDULE_HTML_FILENAME as INPUT_FILENAME
 
 logger = logging.getLogger(__name__)
 
@@ -70,7 +71,7 @@ def save_to_json(schedule_date: str, replacements_data: dict, output_filename: s
 
 def main():
     try:
-        input_path = get_html_source(FILENAME)
+        input_path = get_html_source(INPUT_FILENAME)
     except MissingParserSourceError:
         return None
 
@@ -92,4 +93,4 @@ if __name__ == "__main__":
 
     if result:
         parsed_date, parsed_replacements = result
-        save_to_json(parsed_date, parsed_replacements)
+        save_to_json(parsed_date, parsed_replacements, OUTPUT_FILENAME)

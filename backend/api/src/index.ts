@@ -35,7 +35,8 @@ app.get(
   "/api/replacements",
   (req: Request, res: Response, next: NextFunction) => {
     try {
-      const filePath = path.join(__dirname, "../../data/replacements.json")
+      const fileName = process.env.REPLACEMENTS_FILENAME || "replacements.json"
+      const filePath = path.join(__dirname, `../../data/${fileName}`)
 
       if (!fs.existsSync(filePath)) {
         res.status(404).json({
@@ -76,12 +77,10 @@ app.post(
         `Otrzymano i zapisano nowy plik HTML zastępstw z IP: ${req.ip} (Rozmiar: ${htmlData.length} bajtów)`,
       )
 
-      res
-        .status(200)
-        .json({
-          message:
-            "Plik HTML z zastępstwami został pomyślanie przesłany i zapisany.",
-        })
+      res.status(200).json({
+        message:
+          "Plik HTML z zastępstwami został pomyślanie przesłany i zapisany.",
+      })
     } catch (error) {
       next(error)
     }
