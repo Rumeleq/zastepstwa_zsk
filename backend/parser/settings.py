@@ -1,10 +1,15 @@
 import logging.config
+import os
 from pathlib import Path
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 LOG_DIR = BASE_DIR / "logs"
 LOG_DIR.mkdir(exist_ok=True)
-VULCAN_SCHEDULE_HTML_FILENAME = "Zastępstwa.html"
+VULCAN_SCHEDULE_HTML_FILENAME = os.environ.get("VULCAN_SCHEDULE_HTML_FILENAME", "Zastępstwa.html")
 
 LOGGING_CONFIG = {
     "version": 1,
