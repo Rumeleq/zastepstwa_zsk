@@ -2,4 +2,4 @@ packages:
   - "frontend"
   - "backend/api"
 allowBuilds:
-  '@parcel/watcher': true
+  "@parcel/watcher": true

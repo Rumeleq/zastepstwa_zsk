@@ -1,11 +1,23 @@
+import "dotenv/config"
 import express, { Request, Response } from "express"
 import cors from "cors"
 import fs from "fs"
 import path from "path"
 import morgan from "morgan"
+import rateLimit from "express-rate-limit"
 
+const PORT = process.env.PORT || 8080
 const app = express()
-const PORT = 8080
+
+const limiter = rateLimit({
+  windowMs: 5 * 60 * 1000,
+  max: 100,
+  message: {
+    error: "Zbyt wiele zapytań z tego adresu IP. Spróbuj ponownie za 5 minut.",
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+})
 
 const logsDirectory = path.join(__dirname, "../../logs")
 
@@ -18,9 +30,9 @@ const accessLogStream = fs.createWriteStream(
   { flags: "a" },
 )
 
+app.use(limiter)
 app.use(morgan("combined", { stream: accessLogStream }))
 app.use(morgan("dev"))
-
 app.use(cors())
 
 app.get("/api/replacements", (req: Request, res: Response) => {
