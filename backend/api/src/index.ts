@@ -32,6 +32,10 @@ app.set("trust proxy", 1)
 app.use(limiter)
 app.use(cors())
 
+app.get("/api/health", (req: Request, res: Response) => {
+  res.status(200).json({ status: "ok" })
+})
+
 app.get(
   "/api/replacements",
   (req: Request, res: Response, next: NextFunction) => {
@@ -66,23 +70,19 @@ app.post(
         return
       }
 
-      const fileName =
-        process.env.VULCAN_SCHEDULE_HTML_FILENAME || "Zastępstwa.html"
-      const targetDir = path.join(__dirname, "../../data/")
-      if (!fs.existsSync(targetDir)) {
-        fs.mkdirSync(targetDir, { recursive: true })
-      }
-      const filePath = path.join(targetDir, fileName)
-      await fs.promises.writeFile(filePath, htmlData, { encoding: "utf8" })
       logger.info(
-        `Otrzymano i zapisano nowy plik HTML zastępstw z IP: ${req.ip} (Rozmiar: ${htmlData.length} bajtów)`,
+        `Otrzymano nowy HTML zastępstw z IP: ${req.ip} (Rozmiar: ${htmlData.length} bajtów). Przetwarzanie...`,
       )
 
       await processAndSaveReplacements(htmlData)
 
+      logger.info(
+        `Zastępstwa z IP: ${req.ip} (Rozmiar: ${htmlData.length} bajtów) zostały pomyślnie przetworzone i zapisane.`,
+      )
+
       res.status(200).json({
         message:
-          "Plik HTML z zastępstwami został pomyślanie przesłany i zapisany.",
+          "Plik HTML z zastępstwami został pomyślanie przesłany i sparsowany.",
       })
     } catch (error) {
       next(error)

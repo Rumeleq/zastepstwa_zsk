@@ -6,20 +6,19 @@
     "module": "esnext",
     "types": ["vite/client"],
     "skipLibCheck": true,
-    "baseUrl": ".",
     "paths": {
-      "@assets/*": ["src/assets/*"],
-      "@components/*": ["src/components/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@services/*": ["src/services/*"],
-      "@/*": ["src/*"],
-      "@assets": ["src/assets"],
-      "@components": ["src/components"],
-      "@hooks": ["src/hooks"],
-      "@services": ["src/services"],
-      "@views/*": ["src/views/*"],
-      "@views": ["src/views"],
-      "@": ["src"]
+      "@assets/*": ["./src/assets/*"],
+      "@components/*": ["./src/components/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@services/*": ["./src/services/*"],
+      "@/*": ["./src/*"],
+      "@assets": ["./src/assets"],
+      "@components": ["./src/components"],
+      "@hooks": ["./src/hooks"],
+      "@services": ["./src/services"],
+      "@views/*": ["./src/views/*"],
+      "@views": ["./src/views"],
+      "@": ["./src"]
     },
 
     /* Bundler mode */
