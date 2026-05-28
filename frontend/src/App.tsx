@@ -1,75 +1,18 @@
-import "./App.css"
-import { useGlobalData } from "@hooks"
-import { Header } from "@components"
-import {
-  AllSubstitutions,
-  TeacherSubstitutions,
-  TeacherSelection,
-} from "@views"
-import { useState } from "react"
-
-const View = {
-  All: "all",
-  TeacherSelection: "teacherSelection",
-  TeacherSubstitutions: "teacherSubstitutions",
-} as const
-
-type ViewType = (typeof View)[keyof typeof View]
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { ProtectedRoute } from "@components"
+import { SubstitutionsPage, AdminLoginPage, AdminPanelPage } from "@pages"
 
 function App() {
-  const { data, isLoading, isError, error } = useGlobalData()
-  const [currentView, setCurrentView] = useState<ViewType | null>(View.All)
-  const [selectedTeacher, setSelectedTeacher] = useState<string | null>(null)
-
-  const handleTeacherSelection = (name: string) => {
-    setSelectedTeacher(name)
-    setCurrentView(View.TeacherSubstitutions)
-  }
-
-  function renderView() {
-    if (isLoading) return <p>Pobieranie danych...</p>
-    if (isError) return <p className="error">Błąd: {error?.message}</p>
-    if (!data) return null
-
-    switch (currentView) {
-      case View.All:
-        return (
-          <AllSubstitutions
-            onSwitch={() => {
-              if (selectedTeacher) {
-                setCurrentView(View.TeacherSubstitutions)
-              } else {
-                setCurrentView(View.TeacherSelection)
-              }
-            }}
-          />
-        )
-      case View.TeacherSelection:
-        return (
-          <TeacherSelection
-            onSwitch={() => setCurrentView(View.All)}
-            onSelectTeacher={handleTeacherSelection}
-          />
-        )
-      case View.TeacherSubstitutions:
-        return (
-          <TeacherSubstitutions
-            onSwitch={() => setCurrentView(View.All)}
-            onChangeTeacher={() => {
-              setSelectedTeacher(null)
-              setCurrentView(View.TeacherSelection)
-            }}
-            teacherName={selectedTeacher}
-          />
-        )
-    }
-  }
-
   return (
-    <>
-      <Header />
-      {renderView()}
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<SubstitutionsPage />} />
+        <Route path="/admin/logowanie" element={<AdminLoginPage />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/admin/panel" element={<AdminPanelPage />} />
+        </Route>
+      </Routes>
+    </Router>
   )
 }
 

@@ -38,3 +38,14 @@ export const getReplacements = async () => {
     replacements: replacements,
   }
 }
+
+export const uploadReplacementsHtml = async (htmlContent: string) => {
+  const api_key = localStorage.getItem("admin_api_key")
+  const res = await apiClient.post("/upload", htmlContent, {
+    headers: {
+      "Content-Type": "text/html",
+      "x-api-key": api_key || "",
+    },
+  })
+  return res.data
+}
