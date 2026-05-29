@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import * as React from "react"
 import { uploadReplacementsHtml } from "@services"
 import { ErrorNotice, Header } from "@components"
+import "./AdminPanelPage.scss"
 
 export function AdminPanelPage() {
   const [file, setFile] = useState<File | null>(null)

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { verifyApiKey } from "@services"
 import { ErrorNotice, Header } from "@components"
+import "./AdminLoginPage.scss"
 
 export function AdminLoginPage() {
   const [key, setKey] = useState("")
@@ -29,7 +30,7 @@ export function AdminLoginPage() {
           value={key}
           onChange={(e) => setKey(e.target.value)}
         />
-        {error && ErrorNotice({ message: error })}
+        {error && <ErrorNotice message={error} />}
         <button onClick={handleLogin}>Zatwierdź klucz</button>
       </div>
     </>
