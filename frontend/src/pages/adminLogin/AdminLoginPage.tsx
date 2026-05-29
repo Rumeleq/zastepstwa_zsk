@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { verifyApiKey } from "@services"
-import {ErrorNotice, Header} from "@components"
+import { ErrorNotice, Header } from "@components"
 
 export function AdminLoginPage() {
   const [key, setKey] = useState("")
