@@ -77,6 +77,9 @@ export function Table({ data, showSubstitutingTeacher = true, scheduleDate }: Ta
           </tr>
         </thead>
         <tbody>
+          <tr className="row-separator">
+            <td colSpan={showSubstitutingTeacher ? 8 : 7}></td>
+          </tr>
           {data.map((row, index) => {
             const time = LESSON_HOURS[row.lesson] || "—"
             const isPassed = hasLessonPassed(time, scheduleDate)
