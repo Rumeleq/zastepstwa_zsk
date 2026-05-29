@@ -21,7 +21,7 @@ export const getReplacements = async () => {
   const res = await apiClient.get("/replacements")
   const data = res.data
   const date: string = data.date
-  const replacements: Record<string, Array<Replacement>> = {}
+  const replacements: Record<string, Replacement[]> = {}
   for (const [teacherName, rows] of Object.entries(data.replacements)) {
     replacements[teacherName] = (rows as string[][]).map((row) => ({
       lesson: row[0],
