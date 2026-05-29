@@ -31,6 +31,7 @@ export function TeacherSubstitutions(props: Props) {
       <Table
         data={teacherRows}
         showSubstitutingTeacher={false}
+        scheduleDate={data?.date}
       />
       <button onClick={() => props.onChangeTeacher()}>Usuń Wartacza</button>
     </div>

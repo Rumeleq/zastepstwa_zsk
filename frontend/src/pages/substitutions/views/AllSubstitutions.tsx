@@ -30,7 +30,7 @@ export function AllSubstitutions(props: Props) {
       <button>
         <img src={arrowLeft} alt="Strzałka" onClick={props.onSwitch} />
       </button>
-      <Table data={allRows} showSubstitutingTeacher={true} />
+      <Table data={allRows} showSubstitutingTeacher={true} scheduleDate={data?.date} />
     </div>
   )
 }

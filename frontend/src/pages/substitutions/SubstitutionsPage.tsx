@@ -59,7 +59,7 @@ export function SubstitutionsPage() {
               setSelectedTeacher(null)
               setCurrentView(View.TeacherSelection)
             }}
-            teacherName={selectedTeacher}
+            teacherName={selectedTeacher!}
           />
         )
     }
