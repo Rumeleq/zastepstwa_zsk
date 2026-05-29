@@ -12,7 +12,7 @@ interface Props {
 export function TeacherSubstitutions(props: Props) {
   const { data } = useGlobalData()
   const teacherRows: TableRowData[] = []
-  if (props.teacherName && data?.replacements?.[props.teacherName]) {
+  if (data?.replacements?.[props.teacherName]) {
     const replacements = data.replacements[props.teacherName]
     replacements.forEach((replacement) => {
       teacherRows.push({
