@@ -23,7 +23,7 @@ export function AdminLoginPage() {
     <>
       <Header></Header>
       <div className="login-container">
-        <h3>Wprowadź klucz dostępu</h3>
+        <h3>Wprowadź klucz dostępu do panelu administratora Zastępstw ZSK</h3>
         <input
           type="password"
           value={key}
