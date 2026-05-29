@@ -1,2 +1,3 @@
-export * from "@components/Header/Header"
-export * from "@components/ProtectedRoute"
+export * from "./Header/Header"
+export * from "./ProtectedRoute"
+export * from "./ErrorNotice"
