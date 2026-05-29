@@ -29,8 +29,8 @@ process.on("uncaughtException", (error) => {
 })
 
 app.set("trust proxy", 1)
-app.use(limiter)
 app.use(cors())
+app.use(limiter)
 
 app.get("/api/health", (req: Request, res: Response) => {
   res.status(200).json({ status: "ok" })

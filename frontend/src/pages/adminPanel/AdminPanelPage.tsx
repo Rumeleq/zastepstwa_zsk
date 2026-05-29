@@ -9,9 +9,12 @@ import "./AdminPanelPage.scss"
 export function AdminPanelPage() {
   const [file, setFile] = useState<File | null>(null)
   const [loading, setLoading] = useState(false)
-  const [status, setStatus] = useState<{ type: "success" | "error"; message: string } | null>(null)
+  const [status, setStatus] = useState<{
+    type: "success" | "error"
+    message: string
+  } | null>(null)
   const [isDragging, setIsDragging] = useState(false)
-  
+
   const fileInputRef = useRef<HTMLInputElement>(null)
   const navigate = useNavigate()
   const queryClient = useQueryClient()
@@ -42,7 +45,7 @@ export function AdminPanelPage() {
     e.preventDefault()
     setIsDragging(false)
     setStatus(null)
-    
+
     const droppedFile = e.dataTransfer.files?.[0]
     if (droppedFile) {
       processSelectedFile(droppedFile)
@@ -53,7 +56,10 @@ export function AdminPanelPage() {
     const name = selectedFile.name.toLowerCase()
 
     if (!name.endsWith(".html")) {
-      setStatus({ type: "error", message: "Niepoprawny format pliku! Wybierz plik HTML." })
+      setStatus({
+        type: "error",
+        message: "Niepoprawny format pliku! Wybierz plik HTML.",
+      })
       setFile(null)
       if (fileInputRef.current) {
         fileInputRef.current.value = ""
@@ -80,13 +86,15 @@ export function AdminPanelPage() {
     } catch (err: any) {
       if (err.response && err.response.status === 401) {
         localStorage.removeItem("admin_api_key")
-        navigate("/admin/logowanie", { state: { error: "Klucz dostępu jest niepoprawny!" } })
+        navigate("/admin/logowanie", {
+          state: { error: "Klucz dostępu jest niepoprawny!" },
+        })
       } else {
         const serverErrorMessage =
           err.response?.data?.message ||
           err.response?.data?.error ||
           err.message ||
-          "Wystąpił błąd podczas wysyłania pliku.";
+          "Wystąpił błąd podczas wysyłania pliku."
 
         setStatus({ type: "error", message: serverErrorMessage })
       }
@@ -110,7 +118,7 @@ export function AdminPanelPage() {
         <h2>Panel administratora Zastępstw ZSK</h2>
         <div className="upload-container">
           <h3>Wybierz plik z zastępstwami, by wgrać je do systemu</h3>
-          
+
           <input
             ref={fileInputRef}
             type="file"
@@ -120,22 +128,25 @@ export function AdminPanelPage() {
           />
 
           {!file && (
-            <div 
+            <div
               className={`file-drop-area ${isDragging ? "dragging" : ""}`}
               onClick={() => fileInputRef.current?.click()}
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
             >
-              <button type="button" className="browse-btn">Przeglądaj</button>
+              <button type="button" className="browse-btn">
+                Przeglądaj
+              </button>
               <span>lub przeciągnij i upuść plik .html</span>
             </div>
           )}
-          
+
           {file && (
             <div className="file-details">
               <span>
-                Wybrany plik: <strong>{file.name}</strong> ({(file.size / 1024).toFixed(2)} KB)
+                Wybrany plik: <strong>{file.name}</strong> (
+                {(file.size / 1024).toFixed(2)} KB)
               </span>
               <button
                 type="button"
@@ -148,9 +159,7 @@ export function AdminPanelPage() {
           )}
 
           {status && status.type === "success" && (
-            <div className="alert-success">
-              {status.message}
-            </div>
+            <div className="alert-success">{status.message}</div>
           )}
 
           {status && status.type === "error" && (

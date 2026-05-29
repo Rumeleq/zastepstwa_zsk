@@ -14,7 +14,9 @@
   transition: all 0.3s ease;
 
   &:hover {
-    box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -5px rgba(0, 0, 0, 0.04);
+    box-shadow:
+      0 15px 30px -5px rgba(0, 0, 0, 0.1),
+      0 8px 10px -5px rgba(0, 0, 0, 0.04);
   }
 
   h3 {
@@ -35,7 +37,9 @@
     border-radius: 8px;
     background: var(--code-bg);
     color: var(--text-h);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
     box-sizing: border-box;
 
     &:focus {
@@ -54,14 +58,17 @@
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-    
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      opacity 0.2s ease;
+
     &:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(128, 128, 128, 0.25);
       opacity: 0.9;
     }
-    
+
     &:active {
       transform: translateY(0);
     }
