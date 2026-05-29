@@ -8,7 +8,7 @@ const apiClient = axios.create({
   },
 })
 
-interface Replacement {
+export interface Replacement {
   lesson: string
   teacherOrStatus: string
   className: string
