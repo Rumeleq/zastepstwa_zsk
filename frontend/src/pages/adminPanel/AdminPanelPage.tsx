@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import * as React from "react"
 import { uploadReplacementsHtml } from "@services"
 import { ErrorNotice, Header } from "@components"
+import { useQueryClient } from "@tanstack/react-query"
 import "./AdminPanelPage.scss"
 
 export function AdminPanelPage() {
@@ -13,6 +14,7 @@ export function AdminPanelPage() {
   
   const fileInputRef = useRef<HTMLInputElement>(null)
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
 
   function handleLogout() {
     localStorage.removeItem("admin_api_key")
@@ -74,6 +76,7 @@ export function AdminPanelPage() {
       if (fileInputRef.current) {
         fileInputRef.current.value = ""
       }
+      queryClient.invalidateQueries({ queryKey: ["globalData"] })
     } catch (err: any) {
       if (err.response && err.response.status === 401) {
         localStorage.removeItem("admin_api_key")
