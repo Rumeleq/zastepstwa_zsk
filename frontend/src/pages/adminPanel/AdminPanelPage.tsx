@@ -1,3 +1,8 @@
+import {Header} from "@components";
+
 export function AdminPanelPage() {
-  return null
+  return <>
+    <Header></Header>
+    <div></div>
+  </>
 }

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { verifyApiKey } from "@services"
-import { ErrorNotice } from "@components"
+import {ErrorNotice, Header} from "@components"
 
 export function AdminLoginPage() {
   const [key, setKey] = useState("")
@@ -21,6 +21,7 @@ export function AdminLoginPage() {
 
   return (
     <>
+      <Header></Header>
       <div className="login-container">
         <h3>Wprowadź klucz dostępu</h3>
         <input
