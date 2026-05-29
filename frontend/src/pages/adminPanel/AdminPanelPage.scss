@@ -45,33 +45,48 @@
       margin: 0;
     }
 
-    input[type="file"] {
-      padding: 12px;
+    .file-drop-area {
+      padding: 32px 20px;
       background: var(--code-bg);
-      border: 1px dashed var(--border);
+      border: 2px dashed var(--border);
       border-radius: 12px;
       color: var(--text);
       cursor: pointer;
-      transition: border-color 0.2s ease;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
 
-      &::file-selector-button {
-        padding: 8px 16px;
-        margin-right: 16px;
-        border: none;
-        border-radius: 6px;
+      &.dragging {
         background: var(--accent-bg);
-        color: var(--accent);
-        font-weight: 600;
-        cursor: pointer;
-        transition: background 0.2s ease;
-      }
-
-      &::file-selector-button:hover {
-        background: rgba(170, 59, 255, 0.2); // based on --accent
+        border-color: var(--accent);
       }
 
       &:hover {
         border-color: var(--accent);
+      }
+
+      .browse-btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        background: var(--accent-bg);
+        color: var(--accent);
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s ease, transform 0.2s ease;
+
+        &:hover {
+          background: rgba(170, 59, 255, 0.2); // based on --accent
+          transform: translateY(-2px);
+        }
+      }
+
+      span {
+        font-size: 15px;
+        color: var(--text);
       }
     }
 

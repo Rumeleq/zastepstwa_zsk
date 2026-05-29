@@ -9,6 +9,7 @@ export function AdminPanelPage() {
   const [file, setFile] = useState<File | null>(null)
   const [loading, setLoading] = useState(false)
   const [status, setStatus] = useState<{ type: "success" | "error"; message: string } | null>(null)
+  const [isDragging, setIsDragging] = useState(false)
   
   const fileInputRef = useRef<HTMLInputElement>(null)
   const navigate = useNavigate()
@@ -22,9 +23,34 @@ export function AdminPanelPage() {
     setStatus(null)
     const selectedFile = e.target.files?.[0]
     if (!selectedFile) return
+    processSelectedFile(selectedFile)
+  }
+
+  function handleDragOver(e: React.DragEvent<HTMLDivElement>) {
+    e.preventDefault()
+    setIsDragging(true)
+  }
+
+  function handleDragLeave(e: React.DragEvent<HTMLDivElement>) {
+    e.preventDefault()
+    setIsDragging(false)
+  }
+
+  function handleDrop(e: React.DragEvent<HTMLDivElement>) {
+    e.preventDefault()
+    setIsDragging(false)
+    setStatus(null)
+    
+    const droppedFile = e.dataTransfer.files?.[0]
+    if (droppedFile) {
+      processSelectedFile(droppedFile)
+    }
+  }
+
+  function processSelectedFile(selectedFile: File) {
     const name = selectedFile.name.toLowerCase()
 
-    if (!name.toLowerCase().endsWith(".html")) {
+    if (!name.endsWith(".html")) {
       setStatus({ type: "error", message: "Niepoprawny format pliku! Wybierz plik HTML." })
       setFile(null)
       if (fileInputRef.current) {
@@ -81,12 +107,27 @@ export function AdminPanelPage() {
         <h2>Panel administratora Zastępstw ZSK</h2>
         <div className="upload-container">
           <h3>Wybierz plik z zastępstwami, by wgrać je do systemu</h3>
+          
           <input
             ref={fileInputRef}
             type="file"
             accept=".html"
             onChange={handleFileChange}
+            style={{ display: "none" }}
           />
+
+          {!file && (
+            <div 
+              className={`file-drop-area ${isDragging ? "dragging" : ""}`}
+              onClick={() => fileInputRef.current?.click()}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+            >
+              <button type="button" className="browse-btn">Przeglądaj</button>
+              <span>lub przeciągnij i upuść plik .html</span>
+            </div>
+          )}
           
           {file && (
             <div className="file-details">
