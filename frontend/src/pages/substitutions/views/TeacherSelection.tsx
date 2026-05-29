@@ -1,4 +1,5 @@
 import arrowLeft from "@assets/arrow-back.svg"
+import { useGlobalData } from "@hooks"
 
 interface Props {
   onSwitch: () => void
@@ -6,16 +7,23 @@ interface Props {
 }
 
 export function TeacherSelection(props: Props) {
+  const { data } = useGlobalData()
+  if (!data) return <p>Brak planowanych zastępstw</p>
   return (
     <div>
       <h2>Wybór nauczyciela</h2>
       <button>
         <img src={arrowLeft} alt="Strzałka" onClick={props.onSwitch} />
       </button>
-      <p>Ta strona będzie umożliwiać wybór nauczyciela.</p>
-      <button onClick={() => props.onSelectTeacher("Wartacz")}>
-        Ustaw Wartacza
-      </button>
+
+      {Object.entries(data.replacements).map(([teacherName, _]) => (
+        <button
+          key={teacherName}
+          onClick={() => props.onSelectTeacher(teacherName)}
+        >
+          {teacherName}
+        </button>
+      ))}
     </div>
   )
 }
