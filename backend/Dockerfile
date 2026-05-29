@@ -10,11 +10,6 @@ RUN pnpm install --filter api... --frozen-lockfile
 
 COPY backend/api ./backend/api
 
-FROM base AS dev
-EXPOSE 8080
-CMD ["pnpm", "--filter", "api", "dev"]
-
-FROM base AS prod
 WORKDIR /app/backend/api
 RUN pnpm build
 EXPOSE 8080

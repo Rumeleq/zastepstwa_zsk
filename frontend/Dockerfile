@@ -8,11 +8,6 @@ COPY frontend/package.json ./frontend/
 
 RUN pnpm install --filter frontend... --frozen-lockfile
 
-FROM base AS dev
-COPY frontend ./frontend
-EXPOSE 5173
-CMD ["pnpm", "--filter", "frontend", "dev", "--host"]
-
 FROM base AS build
 COPY frontend ./frontend
 WORKDIR /app/frontend
