@@ -53,11 +53,15 @@ export const uploadReplacementsHtml = async (htmlContent: string) => {
 export const verifyApiKey = async () => {
   const api_key = localStorage.getItem("admin_api_key")
   try {
-    const res = await apiClient.post("/verify-api-key", {}, {
-      headers: {
-        "x-api-key": api_key || "",
-      }
-    })
+    const res = await apiClient.post(
+      "/verify-api-key",
+      {},
+      {
+        headers: {
+          "x-api-key": api_key || "",
+        },
+      },
+    )
     return res.status === 200
   } catch (error) {
     return false

@@ -1,13 +1,12 @@
-import {useNavigate} from "react-router-dom";
-import {useState} from "react";
-import {verifyApiKey} from "@services";
-import {ErrorNotice} from "@components";
+import { useNavigate } from "react-router-dom"
+import { useState } from "react"
+import { verifyApiKey } from "@services"
+import { ErrorNotice } from "@components"
 
 export function AdminLoginPage() {
   const [key, setKey] = useState("")
   const [error, setError] = useState<string | null>(null)
-  const navigate = useNavigate();
-
+  const navigate = useNavigate()
 
   async function handleLogin() {
     setError(null)
@@ -20,14 +19,18 @@ export function AdminLoginPage() {
     }
   }
 
-  return <>
-
-    <div className="login-container">
-      <h3>Wprowadź klucz dostępu</h3>
-      <input type="password" value={key} onChange={(e) => setKey(e.target.value)} />
-      {error && ErrorNotice({ message: error })}
-      <button onClick={handleLogin}>Zatwierdź klucz</button>
-    </div>
-
-  </>
+  return (
+    <>
+      <div className="login-container">
+        <h3>Wprowadź klucz dostępu</h3>
+        <input
+          type="password"
+          value={key}
+          onChange={(e) => setKey(e.target.value)}
+        />
+        {error && ErrorNotice({ message: error })}
+        <button onClick={handleLogin}>Zatwierdź klucz</button>
+      </div>
+    </>
+  )
 }

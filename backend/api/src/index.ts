@@ -36,9 +36,13 @@ app.get("/api/health", (req: Request, res: Response) => {
   res.status(200).json({ status: "ok" })
 })
 
-app.post("/api/verify-api-key", authenticateApiKey, (req: Request, res: Response) => {
-  res.status(200).json({ status: "ok" })
-})
+app.post(
+  "/api/verify-api-key",
+  authenticateApiKey,
+  (req: Request, res: Response) => {
+    res.status(200).json({ status: "ok" })
+  },
+)
 
 app.get(
   "/api/replacements",
