@@ -10,6 +10,7 @@ RUN pnpm install --filter api... --frozen-lockfile
 
 COPY backend/api ./backend/api
 
+FROM base AS dev
 EXPOSE 8080
 CMD ["pnpm", "--filter", "api", "dev"]
 
