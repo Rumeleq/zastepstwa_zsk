@@ -53,8 +53,7 @@ function hasLessonPassed(
     parseInt(endM, 10),
   )
 
-  return new Date("2026-05-30T15:03:00") > lessonEndTime
-
+  return currentTime > lessonEndTime
 }
 
 export function Table({
@@ -72,35 +71,41 @@ export function Table({
     return () => clearInterval(intervalId)
   }, [])
 
-  const firstActiveIndex = data.findIndex(row => {
+  const firstActiveIndex = data.findIndex((row) => {
     const time = LESSON_HOURS[row.lesson] || "—"
     return !hasLessonPassed(time, scheduleDate, currentTime)
   })
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      const activeRow = document.getElementById('active-table-row')
+      const activeRow = document.getElementById("active-table-row")
       if (activeRow) {
-        const wrapper = activeRow.closest('.table-wrapper')
-        const thead = wrapper?.querySelector('thead')
-        
+        const wrapper = activeRow.closest(".table-wrapper")
+        const thead = wrapper?.querySelector("thead")
+
         if (wrapper) {
           const wrapperHeight = wrapper.clientHeight
           const maxScrollTop = wrapper.scrollHeight - wrapperHeight
           const headerHeight = thead ? thead.getBoundingClientRect().height : 80
-          const offset = firstActiveIndex === -1 ? headerHeight - 1 : headerHeight
+          const offset =
+            firstActiveIndex === -1 ? headerHeight - 1 : headerHeight
           const rowRect = activeRow.getBoundingClientRect()
           const wrapperRect = wrapper.getBoundingClientRect()
           const absoluteY = rowRect.top - wrapperRect.top + wrapper.scrollTop
           const exactTarget = absoluteY - offset
 
-          const spacerEl = wrapper.querySelector('.table-spacer')
-          const currentSpacerHeight = spacerEl ? spacerEl.getBoundingClientRect().height : 0
-          
-          const newSpacerHeight = Math.max(0, Math.ceil(currentSpacerHeight + exactTarget - maxScrollTop))
-          
+          const spacerEl = wrapper.querySelector(".table-spacer")
+          const currentSpacerHeight = spacerEl
+            ? spacerEl.getBoundingClientRect().height
+            : 0
+
+          const newSpacerHeight = Math.max(
+            0,
+            Math.ceil(currentSpacerHeight + exactTarget - maxScrollTop),
+          )
+
           if (spacerEl) {
-            (spacerEl as HTMLElement).style.height = `${newSpacerHeight}px`
+            ;(spacerEl as HTMLElement).style.height = `${newSpacerHeight}px`
           }
 
           setTimeout(() => {
@@ -113,7 +118,7 @@ export function Table({
         }
       }
     }, 150)
-    
+
     return () => clearTimeout(timeout)
   }, [firstActiveIndex, data])
 
@@ -184,15 +189,23 @@ export function Table({
             className="table-spacer"
             id={firstActiveIndex === -1 ? "active-table-row" : undefined}
             style={{
-              height: spacerHeight > 0 ? `${spacerHeight}px` : '0px',
+              height: spacerHeight > 0 ? `${spacerHeight}px` : "0px",
               border: "none",
               background: "transparent",
             }}
           >
             <td
               colSpan={showSubstitutingTeacher ? 8 : 7}
-              style={{ border: "none", padding: firstActiveIndex === -1 ? "30px" : "0", verticalAlign: "top" }}
-            >{firstActiveIndex === -1 ? "Upłynęły wszystkie dzisiejsze zastępstwa. Historia zastępstw znajduje się powyżej." : ""}</td>
+              style={{
+                border: "none",
+                padding: firstActiveIndex === -1 ? "30px" : "0",
+                verticalAlign: "top",
+              }}
+            >
+              {firstActiveIndex === -1
+                ? "Upłynęły wszystkie dzisiejsze zastępstwa. Historia zastępstw znajduje się powyżej."
+                : ""}
+            </td>
           </tr>
         </tbody>
       </table>

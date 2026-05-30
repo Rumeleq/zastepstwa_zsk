@@ -36,7 +36,12 @@ export function TeacherSubstitutions(props: Props) {
           <img src={arrowLeft} alt="Strzałka" />
         </button>
         <h2>Zastępstwa: {props.teacherName}</h2>
-        <button className="change-teacher-btn" onClick={() => props.onChangeTeacher()}>Zmień</button>
+        <button
+          className="change-teacher-btn"
+          onClick={() => props.onChangeTeacher()}
+        >
+          Zmień
+        </button>
       </div>
       <Table
         data={teacherRows}
