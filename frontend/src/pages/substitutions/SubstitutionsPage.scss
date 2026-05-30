@@ -112,13 +112,12 @@ code {
   }
 }
 
-/* Lista nauczycieli ułożona w kolumnie */
+/* Lista nauczycieli ułożona w 2 kolumnach */
 .teacher-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  max-width: 450px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Dwie kolumny */
+  gap: 15px;
+  max-width: 800px; /* Poszerzone, żeby zmieścić dwa przyciski obok siebie */
   margin: 0 auto;
   padding: 20px 0 0 0;
   max-height: calc(100vh - 180px); /* Wymusza wewnętrzny scroll, zapobiegając ucinaniu przez body */
@@ -130,13 +129,18 @@ code {
     display: none; /* Chrome, Safari i Opera */
   }
 
-  /* Gwarantowany bufor na dole listy dla przewijalnych kontenerów flex (omija błąd Safari) */
+  /* Gwarantowany bufor na dole listy - musi obejmować obie kolumny w gridzie */
   &::after {
     content: "";
     display: block;
     height: 40px;
     width: 100%;
-    flex-shrink: 0;
+    grid-column: 1 / -1; /* Rozciągnięcie na wszystkie kolumny grida */
+  }
+
+  /* Na węższych ekranach wracamy do jednej kolumny, żeby tekst się nie gniótł */
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
   }
 
   .teacher-btn {
@@ -144,9 +148,9 @@ code {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #ffffff;
-    padding: 16px 24px;
+    padding: 12px 18px; /* Zmniejszony padding (bloczki będą smuklejsze) */
     border-radius: 12px;
-    font-size: 18px;
+    font-size: 20px; /* Powiększona czcionka */
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     cursor: pointer;
@@ -164,6 +168,18 @@ code {
     &:active {
       transform: translateY(0);
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Jeśli ostatni nauczyciel nie ma pary (jest nieparzysty), rozciągnij obszar na obie kolumny, 
+       ale zmuś sam przycisk do wyśrodkowania z szerokością dokładnie 1 kolumny */
+    &:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: calc(50% - 7.5px); /* Połowa szerokości minus połowa odstępu (gap: 15px) */
+      
+      @media (max-width: 768px) {
+        width: 100%;
+      }
     }
   }
 }
