@@ -1,4 +1,4 @@
-body {
+﻿body {
   color: #ffffff;
   margin: 0;
   padding: 0;
@@ -25,20 +25,16 @@ code {
     source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-/* =========================================
-   SYSTEM NAWIGACJI WIDOKÓW
-   ========================================= */
-
 .view-header {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 15px; /* Utrzymuje elementy blisko siebie */
+  gap: 15px;
   margin-bottom: 20px;
   min-height: 48px;
 
   h2 {
-    grid-column: 2; /* Środkowa kolumna wymusza perfekcyjne centrowanie tekstu na stronie */
+    grid-column: 2;
     font-size: 28px;
     font-weight: 600;
     margin: 0;
@@ -47,11 +43,10 @@ code {
     white-space: nowrap;
   }
 
-  /* Przycisk powrotu (Strzałka) */
   .back-button {
     all: unset;
     grid-column: 1;
-    justify-self: end; /* Przysuwa strzałkę do środkowej kolumny (do nagłówka) */
+    justify-self: end;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -83,10 +78,9 @@ code {
     }
   }
 
-  /* Przycisk zmiany nauczyciela */
   .change-teacher-btn {
     grid-column: 3;
-    justify-self: start; /* Przysuwa przycisk zmiany do nagłówka z prawej strony */
+    justify-self: start;
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.15);
     color: #ffffff;
@@ -112,33 +106,29 @@ code {
   }
 }
 
-/* Lista nauczycieli ułożona w 2 kolumnach */
 .teacher-list {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Dwie kolumny */
+  grid-template-columns: 1fr 1fr;
   gap: 15px;
-  max-width: 800px; /* Poszerzone, żeby zmieścić dwa przyciski obok siebie */
+  max-width: 800px;
   margin: 0 auto;
   padding: 20px 0 0 0;
-  max-height: calc(100vh - 180px); /* Wymusza wewnętrzny scroll, zapobiegając ucinaniu przez body */
+  max-height: calc(100vh - 180px);
   
-  /* Ukrywanie fizycznego paska przewijania (scrollbar) */
-  -ms-overflow-style: none; /* IE i Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari i Opera */
+    display: none;
   }
 
-  /* Gwarantowany bufor na dole listy - musi obejmować obie kolumny w gridzie */
   &::after {
     content: "";
     display: block;
     height: 40px;
     width: 100%;
-    grid-column: 1 / -1; /* Rozciągnięcie na wszystkie kolumny grida */
+    grid-column: 1 / -1;
   }
 
-  /* Na węższych ekranach wracamy do jednej kolumny, żeby tekst się nie gniótł */
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
@@ -148,9 +138,9 @@ code {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #ffffff;
-    padding: 12px 18px; /* Zmniejszony padding (bloczki będą smuklejsze) */
+    padding: 12px 18px;
     border-radius: 12px;
-    font-size: 20px; /* Powiększona czcionka */
+    font-size: 20px;
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     cursor: pointer;
@@ -170,12 +160,10 @@ code {
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
-    /* Jeśli ostatni nauczyciel nie ma pary (jest nieparzysty), rozciągnij obszar na obie kolumny, 
-       ale zmuś sam przycisk do wyśrodkowania z szerokością dokładnie 1 kolumny */
     &:last-child:nth-child(odd) {
       grid-column: 1 / -1;
       justify-self: center;
-      width: calc(50% - 7.5px); /* Połowa szerokości minus połowa odstępu (gap: 15px) */
+      width: calc(50% - 7.5px);
       
       @media (max-width: 768px) {
         width: 100%;
@@ -183,3 +171,4 @@ code {
     }
   }
 }
+
