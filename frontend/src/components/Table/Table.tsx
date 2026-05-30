@@ -53,7 +53,7 @@ function hasLessonPassed(
     parseInt(endM, 10),
   )
 
-  return new Date("2026-05-30T08:03:00") > lessonEndTime
+  return new Date("2026-05-30T13:03:00") > lessonEndTime
 
 }
 
@@ -96,15 +96,19 @@ export function Table({
           const spacerEl = wrapper.querySelector('.table-spacer')
           const currentSpacerHeight = spacerEl ? spacerEl.getBoundingClientRect().height : 0
           
-          const newSpacerHeight = Math.max(0, Math.ceil(currentSpacerHeight + exactTarget - maxScrollTop))
+          let newSpacerHeight = Math.max(0, Math.ceil(currentSpacerHeight + exactTarget - maxScrollTop))
           
-          if (spacerEl && newSpacerHeight > currentSpacerHeight) {
+          if (firstActiveIndex === -1) {
+            newSpacerHeight = 0
+          }
+
+          if (spacerEl) {
             (spacerEl as HTMLElement).style.height = `${newSpacerHeight}px`
           }
 
           setTimeout(() => {
             wrapper.scrollTo({ top: exactTarget, behavior: "smooth" })
-          }, 50)
+          }, 100)
         }
       }
     }, 150)
