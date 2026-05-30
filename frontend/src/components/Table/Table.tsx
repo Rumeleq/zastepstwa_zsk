@@ -53,7 +53,8 @@ function hasLessonPassed(
     parseInt(endM, 10),
   )
 
-  return currentTime > lessonEndTime
+  return new Date("2026-05-30T08:03:00") > lessonEndTime
+
 }
 
 export function Table({
@@ -62,7 +63,6 @@ export function Table({
   scheduleDate,
 }: TableProps) {
   const [currentTime, setCurrentTime] = useState(new Date())
-  const [spacerHeight, setSpacerHeight] = useState(0)
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -97,7 +97,10 @@ export function Table({
           const currentSpacerHeight = spacerEl ? spacerEl.getBoundingClientRect().height : 0
           
           const newSpacerHeight = Math.max(0, Math.ceil(currentSpacerHeight + exactTarget - maxScrollTop))
-          setSpacerHeight(newSpacerHeight)
+          
+          if (spacerEl && newSpacerHeight > currentSpacerHeight) {
+            (spacerEl as HTMLElement).style.height = `${newSpacerHeight}px`
+          }
 
           setTimeout(() => {
             wrapper.scrollTo({ top: exactTarget, behavior: "smooth" })
@@ -176,7 +179,6 @@ export function Table({
             className="table-spacer"
             id={firstActiveIndex === -1 ? "active-table-row" : undefined}
             style={{
-              height: spacerHeight > 0 ? `${spacerHeight}px` : '0px',
               border: "none",
               background: "transparent",
             }}
