@@ -92,10 +92,16 @@ export function Table({
           const offset = firstActiveIndex === -1 ? headerHeight - 1 : headerHeight
           activeRow.style.scrollMarginTop = `${offset}px`
 
-          const estimatedTarget = activeRow.offsetTop - offset
-          if (estimatedTarget > maxScrollTop) {
-            setSpacerHeight(estimatedTarget - maxScrollTop + wrapperHeight)
+          const rowRect = activeRow.getBoundingClientRect()
+          const wrapperRect = wrapper.getBoundingClientRect()
+          const absoluteY = rowRect.top - wrapperRect.top + wrapper.scrollTop
+          const exactTarget = absoluteY - offset
 
+          if (exactTarget > maxScrollTop) {
+            const spacerEl = wrapper.querySelector('.table-spacer')
+            const currentSpacerHeight = spacerEl ? spacerEl.getBoundingClientRect().height : 0
+            
+            setSpacerHeight(Math.ceil(currentSpacerHeight + exactTarget - maxScrollTop))
             setTimeout(() => {
               activeRow.scrollIntoView({ behavior: "smooth", block: "start" })
             }, 50)
