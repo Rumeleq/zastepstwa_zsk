@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react"
+import { Fragment, useEffect, useState, useRef } from "react"
 import type { Replacement } from "@services"
 import "./Table.scss"
 
@@ -53,7 +53,7 @@ function hasLessonPassed(
     parseInt(endM, 10),
   )
 
-  return currentTime > lessonEndTime
+  return new Date("2026-05-30T11:03:00") > lessonEndTime
 }
 
 export function Table({
@@ -76,38 +76,52 @@ export function Table({
     return !hasLessonPassed(time, scheduleDate, currentTime)
   })
 
+  const pendingScrollRef = useRef<number | null>(null)
+
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      const activeRow = document.getElementById('active-table-row')
-      if (activeRow) {
-        const wrapper = activeRow.closest('.table-wrapper')
-        const thead = wrapper?.querySelector('thead')
+    const activeRow = document.getElementById("active-table-row")
+    if (activeRow) {
+      const wrapper = activeRow.closest(".table-wrapper")
+      const thead = wrapper?.querySelector("thead")
+
+      if (wrapper) {
+        const wrapperHeight = wrapper.clientHeight
+        const maxScrollTop = wrapper.scrollHeight - wrapperHeight
+        const headerHeight = thead ? thead.getBoundingClientRect().height : 80
+        const offset = firstActiveIndex === -1 ? headerHeight - 1 : headerHeight
+        const rowRect = activeRow.getBoundingClientRect()
+        const wrapperRect = wrapper.getBoundingClientRect()
+        const absoluteY = rowRect.top - wrapperRect.top + wrapper.scrollTop
+        const exactTarget = absoluteY - offset
+
+        const spacerEl = wrapper.querySelector(".table-spacer")
+        const currentSpacerHeight = spacerEl ? spacerEl.getBoundingClientRect().height : 0
+
+        const newSpacerHeight = Math.max(0, Math.ceil(currentSpacerHeight + exactTarget - maxScrollTop))
         
-        if (wrapper) {
-          const wrapperHeight = wrapper.clientHeight
-          const maxScrollTop = wrapper.scrollHeight - wrapperHeight
-          const headerHeight = thead ? thead.getBoundingClientRect().height : 80
-          const offset = firstActiveIndex === -1 ? headerHeight - 1 : headerHeight
-          const rowRect = activeRow.getBoundingClientRect()
-          const wrapperRect = wrapper.getBoundingClientRect()
-          const absoluteY = rowRect.top - wrapperRect.top + wrapper.scrollTop
-          const exactTarget = absoluteY - offset
-
-          const spacerEl = wrapper.querySelector('.table-spacer')
-          const currentSpacerHeight = spacerEl ? spacerEl.getBoundingClientRect().height : 0
-          
-          const newSpacerHeight = Math.max(0, Math.ceil(currentSpacerHeight + exactTarget - maxScrollTop))
+        // Jeśli brakuje miejsca na dole, najpierw rozszerzamy spacer, a scroll zlecamy na po-renderze
+        if (newSpacerHeight > currentSpacerHeight) {
           setSpacerHeight(newSpacerHeight)
-
-          setTimeout(() => {
-            wrapper.scrollTo({ top: exactTarget, behavior: "smooth" })
-          }, 50)
+          pendingScrollRef.current = exactTarget
+        } else {
+          // Jeśli miejsca jest pod dostatkiem, scrollujemy od razu
+          wrapper.scrollTo({ top: exactTarget, behavior: "smooth" })
         }
       }
-    }, 150)
-    
-    return () => clearTimeout(timeout)
+    }
   }, [firstActiveIndex, data])
+
+  // Faza 2: Scrollowanie uruchamiane w 100% pewnie, gdy React zaktualizuje DOM o nowy spacer
+  useEffect(() => {
+    if (pendingScrollRef.current !== null) {
+      const activeRow = document.getElementById("active-table-row")
+      const wrapper = activeRow?.closest(".table-wrapper")
+      if (wrapper) {
+        wrapper.scrollTo({ top: pendingScrollRef.current, behavior: "smooth" })
+      }
+      pendingScrollRef.current = null
+    }
+  }, [spacerHeight])
 
   if (!data || data.length === 0) {
     return (

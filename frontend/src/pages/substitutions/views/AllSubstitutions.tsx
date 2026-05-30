@@ -22,13 +22,7 @@ export function AllSubstitutions(props: Props) {
       })
     }
   }
-  allRows.sort((a, b) => {
-    const isSpecialA = a.substitutingTeacher.toLowerCase().includes("uczniow") || a.substitutingTeacher.toLowerCase().includes("okienko") ? 1 : 0
-    const isSpecialB = b.substitutingTeacher.toLowerCase().includes("uczniow") || b.substitutingTeacher.toLowerCase().includes("okienko") ? 1 : 0
-    if (isSpecialA !== isSpecialB) return isSpecialA - isSpecialB
-    
-    return parseInt(a.lesson) - parseInt(b.lesson)
-  })
+  allRows.sort((a, b) => parseInt(a.lesson) - parseInt(b.lesson))
 
   return (
     <div
