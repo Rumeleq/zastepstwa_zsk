@@ -1,10 +1,13 @@
 .table-wrapper {
   width: 100%;
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
   overflow-x: auto;
   margin: 20px 0;
 
   &::-webkit-scrollbar {
     height: 6px;
+    width: 6px;
   }
   &::-webkit-scrollbar-track {
     background: transparent;
@@ -36,13 +39,23 @@
   }
 
   thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    
     tr {
       th {
+        background: var(--bg);
+        // Tło nagłówka w trybie sticky przykrywało krawędzie z border-collapse
+        // Odtwarzamy je przy użyciu wewnętrznego cienia
+        box-shadow: inset -1px 0 0 white, inset 1px 0 0 white;
+        border: none;
+
         &:first-child {
-          border-left: none;
+          box-shadow: inset -1px 0 0 white;
         }
         &:last-child {
-          border-right: none;
+          box-shadow: inset 1px 0 0 white;
         }
       }
     }

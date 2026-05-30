@@ -1,4 +1,4 @@
-import { Fragment } from "react"
+import { Fragment, useEffect, useRef, useState } from "react"
 import type { Replacement } from "@services"
 import "./Table.scss"
 
@@ -27,7 +27,7 @@ const LESSON_HOURS: Record<string, string> = {
   "11": "16:40 - 17:25",
 }
 
-function hasLessonPassed(lessonTimeStr: string, scheduleDateStr?: string): boolean {
+function hasLessonPassed(lessonTimeStr: string, scheduleDateStr?: string, currentTime: Date = new Date()): boolean {
   if (!scheduleDateStr || scheduleDateStr === "Brak daty") return false
   if (!lessonTimeStr || lessonTimeStr === "—") return false
 
@@ -49,10 +49,45 @@ function hasLessonPassed(lessonTimeStr: string, scheduleDateStr?: string): boole
     parseInt(endM, 10)
   )
 
-  return new Date() > lessonEndTime
+  return new Date("2026-05-30T11:03:00") > lessonEndTime
 }
 
 export function Table({ data, showSubstitutingTeacher = true, scheduleDate }: TableProps) {
+  const [currentTime, setCurrentTime] = useState(new Date())
+
+  // Aktualizacja czasu co minutę
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentTime(new Date())
+    }, 60000)
+    return () => clearInterval(intervalId)
+  }, [])
+
+  const firstActiveIndex = data.findIndex(row => {
+    const time = LESSON_HOURS[row.lesson] || "—"
+    return !hasLessonPassed(time, scheduleDate, currentTime)
+  })
+
+  useEffect(() => {
+    // Opóźnienie na to, by React na pewno przerenderował DOM i przypisał ID
+    const timeout = setTimeout(() => {
+      const activeRow = document.getElementById('active-table-row')
+      if (activeRow) {
+        const wrapper = activeRow.closest('.table-wrapper')
+        if (wrapper) {
+          // Najpewniejsza metoda obliczania offsetu niezależna od układu rodziców (offsetParent)
+          // Wcześniejszy działający kod:
+          wrapper.scrollTo({
+            top: activeRow.offsetTop - 80,
+            behavior: "smooth"
+          })
+        }
+      }
+    }, 150)
+    
+    return () => clearTimeout(timeout)
+  }, [firstActiveIndex, data])
+
   if (!data || data.length === 0) {
     return (
       <div className="table-empty">
@@ -82,14 +117,18 @@ export function Table({ data, showSubstitutingTeacher = true, scheduleDate }: Ta
           </tr>
           {data.map((row, index) => {
             const time = LESSON_HOURS[row.lesson] || "—"
-            const isPassed = hasLessonPassed(time, scheduleDate)
+            const isPassed = hasLessonPassed(time, scheduleDate, currentTime)
             const rowClass = isPassed ? "row-passed" : ""
             const isLast = index === data.length - 1
             const colSpan = showSubstitutingTeacher ? 8 : 7
+            const isFirstActive = index === firstActiveIndex
 
             return (
               <Fragment key={index}>
-                <tr className={rowClass}>
+                <tr 
+                  className={rowClass} 
+                  id={isFirstActive ? "active-table-row" : undefined}
+                >
                   <td className="col-lesson">{row.lesson}</td>
                   <td className="col-time">{time}</td>
                   {showSubstitutingTeacher && (

@@ -23,7 +23,7 @@ export function TeacherSubstitutions(props: Props) {
   }
   teacherRows.sort((a, b) => parseInt(a.lesson) - parseInt(b.lesson))
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0 }}>
       <h2>Zastępstwa dla nauczyciela {props.teacherName}</h2>
       <button>
         <img src={arrowLeft} alt="Strzałka" onClick={props.onSwitch} />
