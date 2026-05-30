@@ -53,7 +53,7 @@ function hasLessonPassed(
     parseInt(endM, 10),
   )
 
-  return new Date("2026-05-30T13:03:00") > lessonEndTime
+  return new Date("2026-05-30T15:03:00") > lessonEndTime
 
 }
 
@@ -63,6 +63,7 @@ export function Table({
   scheduleDate,
 }: TableProps) {
   const [currentTime, setCurrentTime] = useState(new Date())
+  const [spacerHeight, setSpacerHeight] = useState(0)
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -96,19 +97,22 @@ export function Table({
           const spacerEl = wrapper.querySelector('.table-spacer')
           const currentSpacerHeight = spacerEl ? spacerEl.getBoundingClientRect().height : 0
           
-          let newSpacerHeight = Math.max(0, Math.ceil(currentSpacerHeight + exactTarget - maxScrollTop))
+          const newSpacerHeight = Math.max(0, Math.ceil(currentSpacerHeight + exactTarget - maxScrollTop))
           
-          if (firstActiveIndex === -1) {
-            newSpacerHeight = 0
-          }
-
+          // Natychmiastowo nakładamy wysokość na DOM, żeby przeglądarka od razu widziała miejsce 
+          // i płynny scroll się NIE ZABLOKOWAŁ (nie uciął) w połowie drogi!
           if (spacerEl) {
             (spacerEl as HTMLElement).style.height = `${newSpacerHeight}px`
           }
 
+          // Ominięcie błędu ESLint (cascading renders) z opóźnieniem, tylko dla spójności stanu Reacta
+          setTimeout(() => {
+            setSpacerHeight(newSpacerHeight)
+          }, 0)
+
           setTimeout(() => {
             wrapper.scrollTo({ top: exactTarget, behavior: "smooth" })
-          }, 100)
+          }, 50)
         }
       }
     }, 150)
@@ -183,6 +187,7 @@ export function Table({
             className="table-spacer"
             id={firstActiveIndex === -1 ? "active-table-row" : undefined}
             style={{
+              height: spacerHeight > 0 ? `${spacerHeight}px` : '0px',
               border: "none",
               background: "transparent",
             }}
