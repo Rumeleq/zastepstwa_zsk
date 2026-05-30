@@ -71,7 +71,7 @@ export function Table({
     return () => clearInterval(intervalId)
   }, [])
 
-  const firstActiveIndex = data.findIndex(row => {
+  const firstActiveIndex = data.findIndex((row) => {
     const time = LESSON_HOURS[row.lesson] || "—"
     return !hasLessonPassed(time, scheduleDate, currentTime)
   })
@@ -95,10 +95,15 @@ export function Table({
         const exactTarget = absoluteY - offset
 
         const spacerEl = wrapper.querySelector(".table-spacer")
-        const currentSpacerHeight = spacerEl ? spacerEl.getBoundingClientRect().height : 0
+        const currentSpacerHeight = spacerEl
+          ? spacerEl.getBoundingClientRect().height
+          : 0
 
-        const newSpacerHeight = Math.max(0, Math.ceil(currentSpacerHeight + exactTarget - maxScrollTop))
-        
+        const newSpacerHeight = Math.max(
+          0,
+          Math.ceil(currentSpacerHeight + exactTarget - maxScrollTop),
+        )
+
         if (newSpacerHeight > currentSpacerHeight) {
           pendingScrollRef.current = exactTarget
           setSpacerHeight(newSpacerHeight)
@@ -193,12 +198,19 @@ export function Table({
           >
             <td
               colSpan={showSubstitutingTeacher ? 8 : 7}
-              style={{ border: "none", padding: firstActiveIndex === -1 ? "30px" : "0", verticalAlign: "top" }}
-            >{firstActiveIndex === -1 ? "Upłynęły wszystkie dzisiejsze zastępstwa. Historia zastępstw znajduje się powyżej." : ""}</td>
+              style={{
+                border: "none",
+                padding: firstActiveIndex === -1 ? "30px" : "0",
+                verticalAlign: "top",
+              }}
+            >
+              {firstActiveIndex === -1
+                ? "Upłynęły wszystkie dzisiejsze zastępstwa. Historia zastępstw znajduje się powyżej."
+                : ""}
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
   )
 }
-
