@@ -121,6 +121,14 @@ code {
   max-width: 450px;
   margin: 0 auto;
   padding: 20px 0 0 0;
+  max-height: calc(100vh - 180px); /* Wymusza wewnętrzny scroll, zapobiegając ucinaniu przez body */
+  
+  /* Ukrywanie fizycznego paska przewijania (scrollbar) */
+  -ms-overflow-style: none; /* IE i Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari i Opera */
+  }
 
   /* Gwarantowany bufor na dole listy dla przewijalnych kontenerów flex (omija błąd Safari) */
   &::after {

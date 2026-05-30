@@ -27,7 +27,13 @@ export function TeacherSelection(props: Props) {
 
       <div className="teacher-list" style={{ flex: 1, overflowY: "auto", width: "100%" }}>
         {Object.entries(data.replacements)
-          .sort(([nameA], [nameB]) => nameA.localeCompare(nameB))
+          .sort(([nameA], [nameB]) => {
+            const isSpecialA = nameA.toLowerCase().includes("uczniow") || nameA.toLowerCase().includes("okienko") ? 1 : 0
+            const isSpecialB = nameB.toLowerCase().includes("uczniow") || nameB.toLowerCase().includes("okienko") ? 1 : 0
+            if (isSpecialA !== isSpecialB) return isSpecialA - isSpecialB
+            
+            return nameA.localeCompare(nameB)
+          })
           .map(([teacherName, _]) => (
             <button
               key={teacherName}
