@@ -53,7 +53,7 @@ function hasLessonPassed(
     parseInt(endM, 10),
   )
 
-  return new Date("2026-05-30T08:03:00") > lessonEndTime
+  return new Date("2026-05-30T09:03:00") > lessonEndTime
 }
 
 export function Table({
