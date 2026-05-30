@@ -53,7 +53,7 @@ function hasLessonPassed(
     parseInt(endM, 10),
   )
 
-  return new Date("2026-05-30T11:03:00") > lessonEndTime
+  return currentTime > lessonEndTime
 }
 
 export function Table({
@@ -99,23 +99,19 @@ export function Table({
 
         const newSpacerHeight = Math.max(0, Math.ceil(currentSpacerHeight + exactTarget - maxScrollTop))
         
-        // Jeśli brakuje miejsca na dole, najpierw rozszerzamy spacer, a scroll zlecamy na po-renderze
         if (newSpacerHeight > currentSpacerHeight) {
-          setSpacerHeight(newSpacerHeight)
           pendingScrollRef.current = exactTarget
+          setSpacerHeight(newSpacerHeight)
         } else {
-          // Jeśli miejsca jest pod dostatkiem, scrollujemy od razu
           wrapper.scrollTo({ top: exactTarget, behavior: "smooth" })
         }
       }
     }
   }, [firstActiveIndex, data])
 
-  // Faza 2: Scrollowanie uruchamiane w 100% pewnie, gdy React zaktualizuje DOM o nowy spacer
   useEffect(() => {
     if (pendingScrollRef.current !== null) {
-      const activeRow = document.getElementById("active-table-row")
-      const wrapper = activeRow?.closest(".table-wrapper")
+      const wrapper = document.querySelector(".table-wrapper")
       if (wrapper) {
         wrapper.scrollTo({ top: pendingScrollRef.current, behavior: "smooth" })
       }
@@ -190,7 +186,7 @@ export function Table({
             className="table-spacer"
             id={firstActiveIndex === -1 ? "active-table-row" : undefined}
             style={{
-              height: spacerHeight > 0 ? `${spacerHeight}px` : '0px',
+              height: spacerHeight > 0 ? `${spacerHeight}px` : "0px",
               border: "none",
               background: "transparent",
             }}
@@ -205,3 +201,4 @@ export function Table({
     </div>
   )
 }
+
