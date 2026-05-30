@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from "react"
+import { Fragment, useEffect, useState } from "react"
 import type { Replacement } from "@services"
 import "./Table.scss"
 
@@ -27,7 +27,11 @@ const LESSON_HOURS: Record<string, string> = {
   "11": "16:40 - 17:25",
 }
 
-function hasLessonPassed(lessonTimeStr: string, scheduleDateStr?: string, currentTime: Date = new Date()): boolean {
+function hasLessonPassed(
+  lessonTimeStr: string,
+  scheduleDateStr?: string,
+  currentTime: Date = new Date(),
+): boolean {
   if (!scheduleDateStr || scheduleDateStr === "Brak daty") return false
   if (!lessonTimeStr || lessonTimeStr === "—") return false
 
@@ -46,16 +50,19 @@ function hasLessonPassed(lessonTimeStr: string, scheduleDateStr?: string, curren
     parseInt(month, 10) - 1,
     parseInt(day, 10),
     parseInt(endH, 10),
-    parseInt(endM, 10)
+    parseInt(endM, 10),
   )
 
-  return new Date("2026-05-30T11:03:00") > lessonEndTime
+  return new Date("2026-05-30T12:03:00") > lessonEndTime
 }
 
-export function Table({ data, showSubstitutingTeacher = true, scheduleDate }: TableProps) {
+export function Table({
+  data,
+  showSubstitutingTeacher = true,
+  scheduleDate,
+}: TableProps) {
   const [currentTime, setCurrentTime] = useState(new Date())
 
-  // Aktualizacja czasu co minutę
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentTime(new Date())
@@ -63,28 +70,25 @@ export function Table({ data, showSubstitutingTeacher = true, scheduleDate }: Ta
     return () => clearInterval(intervalId)
   }, [])
 
-  const firstActiveIndex = data.findIndex(row => {
+  const firstActiveIndex = data.findIndex((row) => {
     const time = LESSON_HOURS[row.lesson] || "—"
     return !hasLessonPassed(time, scheduleDate, currentTime)
   })
 
   useEffect(() => {
-    // Opóźnienie na to, by React na pewno przerenderował DOM i przypisał ID
     const timeout = setTimeout(() => {
-      const activeRow = document.getElementById('active-table-row')
+      const activeRow = document.getElementById("active-table-row")
       if (activeRow) {
-        const wrapper = activeRow.closest('.table-wrapper')
+        const wrapper = activeRow.closest(".table-wrapper")
         if (wrapper) {
-          // Najpewniejsza metoda obliczania offsetu niezależna od układu rodziców (offsetParent)
-          // Wcześniejszy działający kod:
           wrapper.scrollTo({
             top: activeRow.offsetTop - 80,
-            behavior: "smooth"
+            behavior: "smooth",
           })
         }
       }
     }, 150)
-    
+
     return () => clearTimeout(timeout)
   }, [firstActiveIndex, data])
 
@@ -125,14 +129,16 @@ export function Table({ data, showSubstitutingTeacher = true, scheduleDate }: Ta
 
             return (
               <Fragment key={index}>
-                <tr 
-                  className={rowClass} 
+                <tr
+                  className={rowClass}
                   id={isFirstActive ? "active-table-row" : undefined}
                 >
                   <td className="col-lesson">{row.lesson}</td>
                   <td className="col-time">{time}</td>
                   {showSubstitutingTeacher && (
-                    <td className="col-sub-teacher">{row.substitutingTeacher}</td>
+                    <td className="col-sub-teacher">
+                      {row.substitutingTeacher}
+                    </td>
                   )}
                   <td className="col-class">{row.className}</td>
                   <td className="col-subject">{row.subject}</td>
@@ -148,6 +154,21 @@ export function Table({ data, showSubstitutingTeacher = true, scheduleDate }: Ta
               </Fragment>
             )
           })}
+
+          <tr
+            className="table-spacer"
+            id={firstActiveIndex === -1 ? "active-table-row" : undefined}
+            style={{
+              height: "80vh",
+              border: "none",
+              background: "transparent",
+            }}
+          >
+            <td
+              colSpan={showSubstitutingTeacher ? 8 : 7}
+              style={{ border: "none", padding: 0 }}
+            >{firstActiveIndex === -1 ? "Upłynęły wszystkie dzisiejsze zastępstwa. Przewiń wyżej, aby zobaczyć historię zastępstw." : ""}</td>
+          </tr>
         </tbody>
       </table>
     </div>

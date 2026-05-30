@@ -1,20 +1,15 @@
 .table-wrapper {
   width: 100%;
-  max-height: calc(100vh - 150px);
+  max-height: calc(100vh - 180px);
   overflow-y: auto;
   overflow-x: auto;
-  margin: 20px 0;
+  margin: 20px 0 0 0;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 
   &::-webkit-scrollbar {
-    height: 6px;
-    width: 6px;
-  }
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: rgba(128, 128, 128, 0.3);
-    border-radius: 3px;
+    display: none;
   }
 }
 
@@ -42,13 +37,13 @@
     position: sticky;
     top: 0;
     z-index: 10;
-    
+
     tr {
       th {
         background: var(--bg);
-        // Tło nagłówka w trybie sticky przykrywało krawędzie z border-collapse
-        // Odtwarzamy je przy użyciu wewnętrznego cienia
-        box-shadow: inset -1px 0 0 white, inset 1px 0 0 white;
+        box-shadow:
+          inset -1px 0 0 white,
+          inset 1px 0 0 white;
         border: none;
 
         &:first-child {
