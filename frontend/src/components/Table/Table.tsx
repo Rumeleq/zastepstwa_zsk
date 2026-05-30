@@ -53,7 +53,7 @@ function hasLessonPassed(
     parseInt(endM, 10),
   )
 
-  return new Date("2026-05-30T11:03:00") > lessonEndTime
+  return currentTime > lessonEndTime
 }
 
 export function Table({
@@ -185,7 +185,7 @@ export function Table({
           >
             <td
               colSpan={showSubstitutingTeacher ? 8 : 7}
-              style={{ border: "none", padding: "20px", verticalAlign: "top" }}
+              style={{ border: "none", padding: firstActiveIndex === -1 ? "30px" : "0", verticalAlign: "top" }}
             >{firstActiveIndex === -1 ? "Upłynęły wszystkie dzisiejsze zastępstwa. Przewiń wyżej, aby zobaczyć historię zastępstw." : ""}</td>
           </tr>
         </tbody>
