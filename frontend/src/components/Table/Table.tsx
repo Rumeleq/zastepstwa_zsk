@@ -99,13 +99,10 @@ export function Table({
           
           const newSpacerHeight = Math.max(0, Math.ceil(currentSpacerHeight + exactTarget - maxScrollTop))
           
-          // Natychmiastowo nakładamy wysokość na DOM, żeby przeglądarka od razu widziała miejsce 
-          // i płynny scroll się NIE ZABLOKOWAŁ (nie uciął) w połowie drogi!
           if (spacerEl) {
             (spacerEl as HTMLElement).style.height = `${newSpacerHeight}px`
           }
 
-          // Ominięcie błędu ESLint (cascading renders) z opóźnieniem, tylko dla spójności stanu Reacta
           setTimeout(() => {
             setSpacerHeight(newSpacerHeight)
           }, 0)
