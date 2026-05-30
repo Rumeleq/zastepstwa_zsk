@@ -33,10 +33,12 @@ export function AllSubstitutions(props: Props) {
         minHeight: 0,
       }}
     >
-      <h2>Wszystkie zastępstwa</h2>
-      <button>
-        <img src={arrowLeft} alt="Strzałka" onClick={props.onSwitch} />
-      </button>
+      <div className="view-header">
+        <button className="back-button" onClick={props.onSwitch}>
+          <img src={arrowLeft} alt="Strzałka" />
+        </button>
+        <h2>Wszystkie zastępstwa</h2>
+      </div>
       <Table
         data={allRows}
         showSubstitutingTeacher={true}

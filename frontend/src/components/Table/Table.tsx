@@ -184,7 +184,7 @@ export function Table({
             <td
               colSpan={showSubstitutingTeacher ? 8 : 7}
               style={{ border: "none", padding: firstActiveIndex === -1 ? "30px" : "0", verticalAlign: "top" }}
-            >{firstActiveIndex === -1 ? "Upłynęły wszystkie dzisiejsze zastępstwa. Przewiń wyżej, aby zobaczyć historię zastępstw." : ""}</td>
+            >{firstActiveIndex === -1 ? "Upłynęły wszystkie dzisiejsze zastępstwa. Historia zastępstw znajduje się powyżej." : ""}</td>
           </tr>
         </tbody>
       </table>
