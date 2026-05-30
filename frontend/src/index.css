@@ -64,6 +64,8 @@
 
 body {
   margin: 0;
+  overflow: hidden;
+  
 }
 
 h1,
@@ -93,6 +95,7 @@ h2 {
 }
 p {
   margin: 0;
+  overflow: hidden;
 }
 
 code,

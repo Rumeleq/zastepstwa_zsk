@@ -25,12 +25,25 @@ export function AllSubstitutions(props: Props) {
   allRows.sort((a, b) => parseInt(a.lesson) - parseInt(b.lesson))
 
   return (
-    <div>
-      <h2>Wszystkie zastępstwa</h2>
-      <button>
-        <img src={arrowLeft} alt="Strzałka" onClick={props.onSwitch} />
-      </button>
-      <Table data={allRows} showSubstitutingTeacher={true} />
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        flex: 1,
+        minHeight: 0,
+      }}
+    >
+      <div className="view-header">
+        <button className="back-button" onClick={props.onSwitch}>
+          <img src={arrowLeft} alt="Strzałka" />
+        </button>
+        <h2>Wszystkie zastępstwa</h2>
+      </div>
+      <Table
+        data={allRows}
+        showSubstitutingTeacher={true}
+        scheduleDate={data?.date}
+      />
     </div>
   )
 }

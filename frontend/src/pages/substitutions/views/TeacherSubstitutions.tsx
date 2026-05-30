@@ -23,16 +23,26 @@ export function TeacherSubstitutions(props: Props) {
   }
   teacherRows.sort((a, b) => parseInt(a.lesson) - parseInt(b.lesson))
   return (
-    <div>
-      <h2>Zastępstwa dla nauczyciela {props.teacherName}</h2>
-      <button>
-        <img src={arrowLeft} alt="Strzałka" onClick={props.onSwitch} />
-      </button>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        flex: 1,
+        minHeight: 0,
+      }}
+    >
+      <div className="view-header">
+        <button className="back-button" onClick={props.onSwitch}>
+          <img src={arrowLeft} alt="Strzałka" />
+        </button>
+        <h2>Zastępstwa: {props.teacherName}</h2>
+        <button className="change-teacher-btn" onClick={() => props.onChangeTeacher()}>Zmień</button>
+      </div>
       <Table
         data={teacherRows}
         showSubstitutingTeacher={false}
+        scheduleDate={data?.date}
       />
-      <button onClick={() => props.onChangeTeacher()}>Usuń Wartacza</button>
     </div>
   )
 }
