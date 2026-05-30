@@ -53,7 +53,7 @@ function hasLessonPassed(
     parseInt(endM, 10),
   )
 
-  return new Date("2026-05-30T14:03:00") > lessonEndTime
+  return new Date("2026-05-30T11:03:00") > lessonEndTime
 }
 
 export function Table({
@@ -77,8 +77,6 @@ export function Table({
   })
 
   useEffect(() => {
-    setSpacerHeight(0)
-
     const timeout = setTimeout(() => {
       const activeRow = document.getElementById('active-table-row')
       if (activeRow) {
@@ -97,17 +95,15 @@ export function Table({
           const absoluteY = rowRect.top - wrapperRect.top + wrapper.scrollTop
           const exactTarget = absoluteY - offset
 
-          if (exactTarget > maxScrollTop) {
-            const spacerEl = wrapper.querySelector('.table-spacer')
-            const currentSpacerHeight = spacerEl ? spacerEl.getBoundingClientRect().height : 0
-            
-            setSpacerHeight(Math.ceil(currentSpacerHeight + exactTarget - maxScrollTop))
-            setTimeout(() => {
-              activeRow.scrollIntoView({ behavior: "smooth", block: "start" })
-            }, 50)
-          } else {
+          const spacerEl = wrapper.querySelector('.table-spacer')
+          const currentSpacerHeight = spacerEl ? spacerEl.getBoundingClientRect().height : 0
+          
+          const newSpacerHeight = Math.max(0, Math.ceil(currentSpacerHeight + exactTarget - maxScrollTop))
+          setSpacerHeight(newSpacerHeight)
+
+          setTimeout(() => {
             activeRow.scrollIntoView({ behavior: "smooth", block: "start" })
-          }
+          }, 50)
         }
       }
     }, 150)
