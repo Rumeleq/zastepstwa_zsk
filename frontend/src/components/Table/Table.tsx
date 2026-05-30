@@ -53,7 +53,7 @@ function hasLessonPassed(
     parseInt(endM, 10),
   )
 
-  return new Date("2026-05-30T15:03:00") > lessonEndTime
+  return new Date("2026-05-30T08:03:00") > lessonEndTime
 }
 
 export function Table({
@@ -77,37 +77,31 @@ export function Table({
   })
 
   useEffect(() => {
-    // Resetujemy spacer przed pomiarami
     setSpacerHeight(0)
 
     const timeout = setTimeout(() => {
       const activeRow = document.getElementById('active-table-row')
       if (activeRow) {
         const wrapper = activeRow.closest('.table-wrapper')
+        const thead = wrapper?.querySelector('thead')
+        
         if (wrapper) {
           const wrapperHeight = wrapper.clientHeight
           const maxScrollTop = wrapper.scrollHeight - wrapperHeight
-          const targetScrollTop = activeRow.offsetTop - 80
+          const headerHeight = thead ? thead.getBoundingClientRect().height : 80
 
-          if (targetScrollTop > maxScrollTop) {
-            // Brakuje miejsca, żeby dociągnąć lekcję do samej góry. 
-            // Dodajemy dokładnie tyle pustego miejsca, ile brakuje.
-            const neededSpace = targetScrollTop - maxScrollTop
-            setSpacerHeight(neededSpace)
+          const offset = firstActiveIndex === -1 ? headerHeight - 2 : headerHeight + 5
+          activeRow.style.scrollMarginTop = `${offset}px`
 
-            // Dajemy Reactowi chwilkę na wyrenderowanie nowego rozmiaru spacera
+          const estimatedTarget = activeRow.offsetTop - offset
+          if (estimatedTarget > maxScrollTop) {
+            setSpacerHeight(estimatedTarget - maxScrollTop + wrapperHeight)
+
             setTimeout(() => {
-              wrapper.scrollTo({
-                top: targetScrollTop,
-                behavior: "smooth"
-              })
+              activeRow.scrollIntoView({ behavior: "smooth", block: "start" })
             }, 50)
           } else {
-            // Miejsca jest pod dostatkiem (np. to pierwsza lekcja rano)
-            wrapper.scrollTo({
-              top: targetScrollTop,
-              behavior: "smooth"
-            })
+            activeRow.scrollIntoView({ behavior: "smooth", block: "start" })
           }
         }
       }
@@ -190,7 +184,7 @@ export function Table({
           >
             <td
               colSpan={showSubstitutingTeacher ? 8 : 7}
-              style={{ border: "none", padding: 0 }}
+              style={{ border: "none", padding: "20px", verticalAlign: "top" }}
             >{firstActiveIndex === -1 ? "Upłynęły wszystkie dzisiejsze zastępstwa. Przewiń wyżej, aby zobaczyć historię zastępstw." : ""}</td>
           </tr>
         </tbody>
