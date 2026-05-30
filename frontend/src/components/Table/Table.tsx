@@ -88,8 +88,6 @@ export function Table({
           const maxScrollTop = wrapper.scrollHeight - wrapperHeight
           const headerHeight = thead ? thead.getBoundingClientRect().height : 80
           const offset = firstActiveIndex === -1 ? headerHeight - 1 : headerHeight
-          activeRow.style.scrollMarginTop = `${offset}px`
-
           const rowRect = activeRow.getBoundingClientRect()
           const wrapperRect = wrapper.getBoundingClientRect()
           const absoluteY = rowRect.top - wrapperRect.top + wrapper.scrollTop
@@ -102,7 +100,7 @@ export function Table({
           setSpacerHeight(newSpacerHeight)
 
           setTimeout(() => {
-            activeRow.scrollIntoView({ behavior: "smooth", block: "start" })
+            wrapper.scrollTo({ top: exactTarget, behavior: "smooth" })
           }, 50)
         }
       }
