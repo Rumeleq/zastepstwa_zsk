@@ -53,7 +53,7 @@ function hasLessonPassed(
     parseInt(endM, 10),
   )
 
-  currentTime = new Date("2026-05-31T15:03:00")
+  currentTime = new Date("2026-05-31T09:03:00")
 
   return currentTime > lessonEndTime
 }
@@ -107,7 +107,7 @@ export function Table({
 
           const newSpacerHeight = Math.max(
             0,
-            Math.ceil(currentSpacerHeight + exactTarget - maxScrollTop) + 5,
+            Math.ceil(currentSpacerHeight + exactTarget - maxScrollTop),
           )
 
           if (spacerEl) {
