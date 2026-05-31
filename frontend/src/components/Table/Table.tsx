@@ -53,6 +53,8 @@ function hasLessonPassed(
     parseInt(endM, 10),
   )
 
+  currentTime = new Date("2026-05-31T15:03:00")
+
   return currentTime > lessonEndTime
 }
 
@@ -62,7 +64,6 @@ export function Table({
   scheduleDate,
 }: TableProps) {
   const [currentTime, setCurrentTime] = useState(new Date())
-  const [spacerHeight, setSpacerHeight] = useState(0)
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -84,8 +85,13 @@ export function Table({
         const thead = wrapper?.querySelector("thead")
 
         if (wrapper) {
-          const wrapperHeight = wrapper.clientHeight
-          const maxScrollTop = wrapper.scrollHeight - wrapperHeight
+          const maxWrapperHeight = window.innerHeight - 220
+
+          const tableEl = wrapper.querySelector("table")
+          const contentHeight = tableEl
+            ? tableEl.getBoundingClientRect().height
+            : wrapper.scrollHeight
+          const maxScrollTop = contentHeight - maxWrapperHeight
           const headerHeight = thead ? thead.getBoundingClientRect().height : 80
           const offset =
             firstActiveIndex === -1 ? headerHeight - 1 : headerHeight
@@ -101,16 +107,18 @@ export function Table({
 
           const newSpacerHeight = Math.max(
             0,
-            Math.ceil(currentSpacerHeight + exactTarget - maxScrollTop),
+            Math.ceil(currentSpacerHeight + exactTarget - maxScrollTop) + 5,
           )
 
           if (spacerEl) {
-            ;(spacerEl as HTMLElement).style.height = `${newSpacerHeight}px`
+            const spacerDiv = spacerEl.querySelector(
+              ".spacer-div",
+            ) as HTMLElement
+            if (spacerDiv) {
+              spacerDiv.style.height = `${newSpacerHeight}px`
+            }
+            void wrapper.scrollHeight
           }
-
-          setTimeout(() => {
-            setSpacerHeight(newSpacerHeight)
-          }, 0)
 
           setTimeout(() => {
             wrapper.scrollTo({ top: exactTarget, behavior: "smooth" })
@@ -188,23 +196,27 @@ export function Table({
           <tr
             className="table-spacer"
             id={firstActiveIndex === -1 ? "active-table-row" : undefined}
-            style={{
-              height: spacerHeight > 0 ? `${spacerHeight}px` : "0px",
-              border: "none",
-              background: "transparent",
-            }}
           >
             <td
               colSpan={showSubstitutingTeacher ? 8 : 7}
               style={{
                 border: "none",
-                padding: firstActiveIndex === -1 ? "30px" : "0",
+                padding: "0",
                 verticalAlign: "top",
               }}
             >
-              {firstActiveIndex === -1
-                ? "Upłynęły wszystkie dzisiejsze zastępstwa. Historia zastępstw znajduje się powyżej."
-                : ""}
+              <div
+                className="spacer-div"
+                style={{
+                  height: "0px",
+                  padding: firstActiveIndex === -1 ? "30px" : "0",
+                  boxSizing: "border-box",
+                }}
+              >
+                {firstActiveIndex === -1
+                  ? "Upłynęły wszystkie dzisiejsze zastępstwa. Historia zastępstw znajduje się powyżej."
+                  : ""}
+              </div>
             </td>
           </tr>
         </tbody>
