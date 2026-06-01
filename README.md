@@ -21,6 +21,8 @@
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
 ![Docker Compose](https://img.shields.io/badge/Docker_Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Readme](https://img.shields.io/badge/README-000000?style=for-the-badge&logo=markdown&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS-663399.svg?style=for-the-badge&logo=CSS&logoColor=white)
+![HTML](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 
 
 System dla Zespołu Szkół Komunikacji (ZSK) do wyświetlania zastępstw nauczycieli. Projekt automatyzuje proces pozyskiwania danych o zastępstwach z plików HTML, analizuje je i serwuje poprzez REST API aplikacji frontendowej.
