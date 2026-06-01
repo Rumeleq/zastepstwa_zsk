@@ -79,13 +79,13 @@ app.post(
       }
 
       logger.info(
-        `Otrzymano nowy HTML zastępstw z IP: ${req.ip} (Rozmiar: ${htmlData.length} bajtów). Przetwarzanie...`,
+        `Otrzymano nowy HTML zastępstw (Rozmiar: ${htmlData.length} bajtów). Przetwarzanie...`,
       )
 
       await processAndSaveReplacements(htmlData)
 
       logger.info(
-        `Zastępstwa z IP: ${req.ip} (Rozmiar: ${htmlData.length} bajtów) zostały pomyślnie przetworzone i zapisane.`,
+        `Zastępstwa (Rozmiar: ${htmlData.length} bajtów) zostały pomyślnie przetworzone i zapisane.`,
       )
 
       res.status(200).json({

@@ -29,7 +29,7 @@ export function authenticateApiKey(
 
   if (!providedApiKey || typeof providedApiKey !== "string") {
     logger.warn(
-      `Brak klucza autoryzacyjnego. IP: ${req.ip}, Ścieżka: ${req.originalUrl}`,
+      `Brak klucza autoryzacyjnego. Ścieżka: ${req.originalUrl}`,
     )
     res
       .status(401)
@@ -48,7 +48,7 @@ export function authenticateApiKey(
 
   if (!crypto.timingSafeEqual(providedHash, expectedHash)) {
     logger.warn(
-      `Nieudana próba dostępu. IP: ${req.ip}, Ścieżka: ${req.originalUrl}`,
+      `Nieudana próba dostępu. Ścieżka: ${req.originalUrl}`,
     )
     res.status(401).json({ error: "Nieprawidłowy klucz autoryzacyjny." })
     return
@@ -66,7 +66,6 @@ export function errorHandler(
   logger.error(
     `[Express] Wystąpił błąd podczas żądania do ${req.originalUrl}`,
     {
-      ip: req.ip,
       message: err.message,
       stack: err.stack,
     },
