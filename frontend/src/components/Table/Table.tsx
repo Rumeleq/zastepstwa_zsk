@@ -83,12 +83,32 @@ export function Table({
         const thead = wrapper?.querySelector("thead")
 
         if (wrapper) {
-          const maxWrapperHeight = window.innerHeight - 220
+          const maxWrapperHeight = wrapper.clientHeight
+
+          const spacerEl = wrapper.querySelector(".table-spacer")
+          const currentSpacerHeight = spacerEl
+            ? spacerEl.getBoundingClientRect().height
+            : 0
 
           const tableEl = wrapper.querySelector("table")
           const contentHeight = tableEl
             ? tableEl.getBoundingClientRect().height
             : wrapper.scrollHeight
+
+          const baseTableHeight = contentHeight - currentSpacerHeight
+
+          if (baseTableHeight <= maxWrapperHeight) {
+            if (spacerEl) {
+              const spacerDiv = spacerEl.querySelector(
+                ".spacer-div",
+              ) as HTMLElement
+              if (spacerDiv) {
+                spacerDiv.style.height = "0px"
+              }
+            }
+            return
+          }
+
           const maxScrollTop = contentHeight - maxWrapperHeight
           const headerHeight = thead ? thead.getBoundingClientRect().height : 80
           const offset =
@@ -96,12 +116,7 @@ export function Table({
           const rowRect = activeRow.getBoundingClientRect()
           const wrapperRect = wrapper.getBoundingClientRect()
           const absoluteY = rowRect.top - wrapperRect.top + wrapper.scrollTop
-          const exactTarget = absoluteY - offset
-
-          const spacerEl = wrapper.querySelector(".table-spacer")
-          const currentSpacerHeight = spacerEl
-            ? spacerEl.getBoundingClientRect().height
-            : 0
+          const exactTarget = Math.max(0, absoluteY - offset)
 
           const newSpacerHeight = Math.max(
             0,
