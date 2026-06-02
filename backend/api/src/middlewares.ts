@@ -28,9 +28,7 @@ export function authenticateApiKey(
   }
 
   if (!providedApiKey || typeof providedApiKey !== "string") {
-    logger.warn(
-      `Brak klucza autoryzacyjnego. Ścieżka: ${req.originalUrl}`,
-    )
+    logger.warn(`Brak klucza autoryzacyjnego. Ścieżka: ${req.originalUrl}`)
     res
       .status(401)
       .json({ error: "Brak klucza autoryzacyjnego lub nieprawidłowy format." })
@@ -47,9 +45,7 @@ export function authenticateApiKey(
     .digest()
 
   if (!crypto.timingSafeEqual(providedHash, expectedHash)) {
-    logger.warn(
-      `Nieudana próba dostępu. Ścieżka: ${req.originalUrl}`,
-    )
+    logger.warn(`Nieudana próba dostępu. Ścieżka: ${req.originalUrl}`)
     res.status(401).json({ error: "Nieprawidłowy klucz autoryzacyjny." })
     return
   }
