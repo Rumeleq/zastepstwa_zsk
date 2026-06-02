@@ -10,8 +10,7 @@ import { Header } from "@components"
 
 const View = {
   All: "all",
-  TeacherSelection: "teacherSelection",
-  TeacherSubstitutions: "teacherSubstitutions",
+  TeacherSelection: "teacherSelection", TeacherSubstitutions: "teacherSubstitutions",
 } as const
 
 type ViewType = (typeof View)[keyof typeof View]
