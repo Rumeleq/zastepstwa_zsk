@@ -69,7 +69,7 @@ app.get(
 app.post(
   "/api/upload",
   authenticateApiKey,
-  express.text({ type: "text/html", limit: "10mb" }),
+  express.text({ type: "text/html", limit: "5mb" }),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const htmlData = req.body
