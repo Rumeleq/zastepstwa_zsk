@@ -24,5 +24,4 @@
 ![CSS](https://img.shields.io/badge/CSS-663399.svg?style=for-the-badge&logo=CSS&logoColor=white)
 ![HTML](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 
-
 System dla Zespołu Szkół Komunikacji (ZSK) do wyświetlania zastępstw nauczycieli. Projekt automatyzuje proces pozyskiwania danych o zastępstwach z plików HTML, analizuje je i serwuje poprzez REST API aplikacji frontendowej.
