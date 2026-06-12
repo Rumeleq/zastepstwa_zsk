@@ -27,11 +27,11 @@ export const getReplacements = async () => {
     replacements[teacherName] = (rows as string[][]).map((row) => ({
       lesson: row[0],
       time: row[1],
-      teacherOrStatus: row[1],
-      className: row[2],
-      subject: row[3],
-      room: row[4],
-      comments: row[5],
+      teacherOrStatus: row[2],
+      className: row[3],
+      subject: row[4],
+      room: row[5],
+      comments: row[6],
     }))
   }
 
