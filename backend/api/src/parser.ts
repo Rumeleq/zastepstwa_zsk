@@ -33,8 +33,15 @@ export async function processAndSaveReplacements(htmlData: string) {
     const lessonInfo = columns.map((col) =>
       $(col).text().replaceAll("|", " | ").trim(),
     )
+
     // Kopiujemy nauczyciela zastępującego, usuwając go jednocześnie z informacji o lekcji
     const teacher = lessonInfo.splice(5, 1)[0]
+    const lesson = lessonInfo[0]
+    if (lesson) {
+      const lessonNumberAndHour = lesson.split(", ")
+      lessonInfo[0] = lessonNumberAndHour[0] || ""
+      lessonInfo.splice(1, 0, lessonNumberAndHour[1] || "")
+    }
 
     if (!teacher) continue
     if (!replacements[teacher]) {

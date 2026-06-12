@@ -10,6 +10,7 @@ const apiClient = axios.create({
 
 export interface Replacement {
   lesson: string
+  time: string
   teacherOrStatus: string
   className: string
   subject: string
@@ -25,6 +26,7 @@ export const getReplacements = async () => {
   for (const [teacherName, rows] of Object.entries(data.replacements)) {
     replacements[teacherName] = (rows as string[][]).map((row) => ({
       lesson: row[0],
+      time: row[1],
       teacherOrStatus: row[1],
       className: row[2],
       subject: row[3],

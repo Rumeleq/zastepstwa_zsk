@@ -12,21 +12,6 @@ export interface TableProps {
   scheduleDate?: string
 }
 
-const LESSON_HOURS: Record<string, string> = {
-  "0": "7:10 - 7:55",
-  "1": "8:00 - 8:45",
-  "2": "8:50 - 9:35",
-  "3": "9:50 - 10:35",
-  "4": "10:40 - 11:25",
-  "5": "11:30 - 12:15",
-  "6": "12:30 - 13:15",
-  "7": "13:20 - 14:05",
-  "8": "14:10 - 14:55",
-  "9": "15:00 - 15:45",
-  "10": "15:50 - 16:35",
-  "11": "16:40 - 17:25",
-}
-
 function hasLessonPassed(
   lessonTimeStr: string,
   scheduleDateStr?: string,
@@ -71,7 +56,7 @@ export function Table({
   }, [])
 
   const firstActiveIndex = data.findIndex((row) => {
-    const time = LESSON_HOURS[row.lesson] || "—"
+    const time = row.time
     return !hasLessonPassed(time, scheduleDate, currentTime)
   })
 
@@ -171,8 +156,11 @@ export function Table({
             <td colSpan={showSubstitutingTeacher ? 8 : 7}></td>
           </tr>
           {data.map((row, index) => {
-            const time = LESSON_HOURS[row.lesson] || "—"
-            const isPassed = hasLessonPassed(time, scheduleDate, currentTime)
+            const isPassed = hasLessonPassed(
+              row.time,
+              scheduleDate,
+              currentTime,
+            )
             const rowClass = isPassed ? "row-passed" : ""
             const isLast = index === data.length - 1
             const colSpan = showSubstitutingTeacher ? 8 : 7
@@ -185,7 +173,7 @@ export function Table({
                   id={isFirstActive ? "active-table-row" : undefined}
                 >
                   <td className="col-lesson">{row.lesson}</td>
-                  <td className="col-time">{time}</td>
+                  <td className="col-time">{row.time}</td>
                   {showSubstitutingTeacher && (
                     <td className="col-sub-teacher">
                       {row.substitutingTeacher}
