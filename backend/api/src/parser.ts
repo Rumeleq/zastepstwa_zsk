@@ -30,7 +30,9 @@ export async function processAndSaveReplacements(htmlData: string) {
     const columns = $(rows[i]).find("td").toArray()
     if (columns.length < 6) continue
 
-    const lessonInfo = columns.map((col) => $(col).text().trim())
+    const lessonInfo = columns.map((col) =>
+      $(col).text().replaceAll("|", " | ").trim(),
+    )
     // Kopiujemy nauczyciela zastępującego, usuwając go jednocześnie z informacji o lekcji
     const teacher = lessonInfo.splice(5, 1)[0]
 
