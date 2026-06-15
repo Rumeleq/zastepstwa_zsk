@@ -147,7 +147,7 @@ export function Table({
             <th>Klasa</th>
             <th>Przedmiot</th>
             <th>Sala</th>
-            <th>Nauczyciel nieobecny / Status</th>
+            <th>Nauczyciel nieobecny</th>
             <th>Uwagi</th>
           </tr>
         </thead>
