@@ -1,528 +1,133 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Zastępstwa</title>
-    <style>
-      table,
-      th,
-      td {
-        border: 1px solid black;
-      }
-      table {
-        border: 1px solid black;
-        margin-bottom: 30px;
-        width: 80%;
-        border-collapse: collapse;
-        table-layout: fixed;
-        margin-left: auto;
-        margin-right: auto;
-        overflow-wrap: break-word;
-        text-align: center;
-      }
-      th {
-        padding: 5px;
-        text-align: left;
-      }
-      h1,
-      h2 {
-        text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Zastępstwa</h1>
-    <h2>Okres: 12.06.2026 (śr.) - 12.06.2026 (śr.)</h2>
-    <table>
-      <tr>
-        <th colspan="7">Dzień: 10.06.2026 (śr.)</th>
-      </tr>
-      <tr>
-        <th style="text-align: center">Lekcja</th>
-        <th style="text-align: center">Nauczyciel/wakat</th>
-        <th style="text-align: center">Oddział</th>
-        <th style="text-align: center">Przedmiot</th>
-        <th style="text-align: center">Sala</th>
-        <th style="text-align: center">Zastępca</th>
-        <th style="text-align: center">Uwagi</th>
-      </tr>
-      <tr>
-        <td>0, 07:10-07:55</td>
-        <td>Giżyński Kamil</td>
-        <td>3E|2/2</td>
-        <td>Informatyka</td>
-        <td>41</td>
-        <td>Bez konsekwencji (nieobecny oddział nauczyciela)</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>0, 07:10-07:55</td>
-        <td>Kozłowski Adam</td>
-        <td>3C|2/2</td>
-        <td>Pracownia sieci komputerowych</td>
-        <td>43</td>
-        <td>Uczniowie przychodzą później</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>1, 08:00-08:45</td>
-        <td>Giżyński Kamil</td>
-        <td>3E|2/2</td>
-        <td>Informatyka</td>
-        <td>41</td>
-        <td>Bez konsekwencji (nieobecny oddział nauczyciela)</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>1, 08:00-08:45</td>
-        <td>Kocik Rafał</td>
-        <td>3B|1/2</td>
-        <td>Pracownia systemów operacyjnych</td>
-        <td>42</td>
-        <td>Uczniowie przychodzą później</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>1, 08:00-08:45</td>
-        <td>Kozłowski Adam</td>
-        <td>3C|2/2</td>
-        <td>Pracownia sieci komputerowych</td>
-        <td>43</td>
-        <td>Uczniowie przychodzą później</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>1, 08:00-08:45</td>
-        <td>Nowak Marek</td>
-        <td>1E</td>
-        <td>Edukacja dla bezpieczeństwa</td>
-        <td>33</td>
-        <td>Uczniowie przychodzą później</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>1, 08:00-08:45</td>
-        <td>Pietrzak Artur</td>
-        <td>1D</td>
-        <td>Język polski</td>
-        <td>28</td>
-        <td>Okienko dla uczniów</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>1, 08:00-08:45</td>
-        <td>Renk Dorota</td>
-        <td>1A</td>
-        <td>Systemy operacyjne</td>
-        <td>44</td>
-        <td>Uczniowie przychodzą później</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>2, 08:50-09:35</td>
-        <td>Giżyński Kamil</td>
-        <td>3E|1/2</td>
-        <td>Informatyka</td>
-        <td>41</td>
-        <td>Bez konsekwencji (nieobecny oddział nauczyciela)</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>2, 08:50-09:35</td>
-        <td>Kocik Rafał</td>
-        <td>3B|1/2</td>
-        <td>Pracownia systemów operacyjnych</td>
-        <td>42</td>
-        <td>Uczniowie przychodzą później</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>2, 08:50-09:35</td>
-        <td>Lerczak Agata</td>
-        <td>4B|2/2</td>
-        <td>Informatyka</td>
-        <td>51</td>
-        <td>Okienko dla uczniów</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>2, 08:50-09:35</td>
-        <td>Nowak Marek</td>
-        <td>1B</td>
-        <td>Bezpieczeństwo i higiena pracy</td>
-        <td>33</td>
-        <td>Kuczewski Filip</td>
-        <td>Za nieobecny oddział</td>
-      </tr>
-      <tr>
-        <td>2, 08:50-09:35</td>
-        <td>Pietrzak Artur</td>
-        <td>1C</td>
-        <td>Język polski</td>
-        <td>28</td>
-        <td>Uczniowie przychodzą później</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>2, 08:50-09:35</td>
-        <td>Renk Dorota</td>
-        <td>1A|2/2</td>
-        <td>Pracownia systemów operacyjnych</td>
-        <td>43</td>
-        <td>Uczniowie przychodzą później</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>3, 09:50-10:35</td>
-        <td>Kocik Rafał</td>
-        <td>2A</td>
-        <td>Sieci komputerowe</td>
-        <td>44</td>
-        <td>Rozwadowska Adriana</td>
-        <td>za nieobecny oddział 3e</td>
-      </tr>
-      <tr>
-        <td>3, 09:50-10:35</td>
-        <td>Kozłowski Adam</td>
-        <td>3G|elek</td>
-        <td>Układy cyfrowe</td>
-        <td>43</td>
-        <td>Okienko dla uczniów</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>3, 09:50-10:35</td>
-        <td>Lerczak Agata</td>
-        <td>4B|2/2</td>
-        <td>Informatyka</td>
-        <td>51</td>
-        <td>Okienko dla uczniów</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>3, 09:50-10:35</td>
-        <td>Nowak Marek</td>
-        <td>1C</td>
-        <td>Bezpieczeństwo i higiena pracy</td>
-        <td>33</td>
-        <td>Uczniowie przychodzą później</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>3, 09:50-10:35</td>
-        <td>Pietrzak Artur</td>
-        <td>4C</td>
-        <td>Język polski</td>
-        <td>28</td>
-        <td>Okienko dla uczniów</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>3, 09:50-10:35</td>
-        <td>Renk Dorota</td>
-        <td>2B|t.infor.</td>
-        <td>Pracownia systemów operacyjnych</td>
-        <td>42</td>
-        <td>Okienko dla uczniów</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>4, 10:40-11:25</td>
-        <td>Giżyński Kamil</td>
-        <td>4C|1/2</td>
-        <td>Pracownia programowania aplikacji mobilnych</td>
-        <td>42</td>
-        <td>Okienko dla uczniów</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>4, 10:40-11:25</td>
-        <td>Kocik Rafał</td>
-        <td>2A</td>
-        <td>Pracownia sieci komputerowych</td>
-        <td>44</td>
-        <td>Okienko dla uczniów</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>4, 10:40-11:25</td>
-        <td>Lerczak Agata</td>
-        <td>3B|2/2</td>
-        <td>Informatyka</td>
-        <td>51</td>
-        <td>Okienko dla uczniów</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>4, 10:40-11:25</td>
-        <td>Misterski Rafał</td>
-        <td>3F|2/2</td>
-        <td>Pracownia elektryczna i elektroniczna</td>
-        <td>47</td>
-        <td>Okienko dla uczniów</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>4, 10:40-11:25</td>
-        <td>Nowak Marek</td>
-        <td>1A</td>
-        <td>Bezpieczeństwo i higiena pracy</td>
-        <td>33</td>
-        <td>Gizelska Alicja</td>
-        <td>Za nieobecny oddział</td>
-      </tr>
-      <tr>
-        <td>4, 10:40-11:25</td>
-        <td>Pietrzak Artur</td>
-        <td>4E</td>
-        <td>Język polski</td>
-        <td>28</td>
-        <td>Okienko dla uczniów</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>4, 10:40-11:25</td>
-        <td>Renk Dorota</td>
-        <td>2B|t.infor.</td>
-        <td>Pracownia systemów operacyjnych</td>
-        <td>42</td>
-        <td>Okienko dla uczniów</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>5, 11:30-12:15</td>
-        <td>Kocik Rafał</td>
-        <td>2A</td>
-        <td>Pracownia sieci komputerowych</td>
-        <td>44</td>
-        <td>Witczak Marcin</td>
-        <td>Za nieobecny oddział</td>
-      </tr>
-      <tr>
-        <td>5, 11:30-12:15</td>
-        <td>Łażewski Marek</td>
-        <td>1B</td>
-        <td>Biznes i zarządzanie</td>
-        <td>17</td>
-        <td>Piechocki Piotr</td>
-        <td>Za nieobecny oddział</td>
-      </tr>
-      <tr>
-        <td>5, 11:30-12:15</td>
-        <td>Nowak Marek</td>
-        <td>1C</td>
-        <td>Edukacja dla bezpieczeństwa</td>
-        <td>33</td>
-        <td>Okienko dla uczniów</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>5, 11:30-12:15</td>
-        <td>Renk Dorota</td>
-        <td>1A|1/2</td>
-        <td>Pracownia systemów operacyjnych</td>
-        <td>43</td>
-        <td>Okienko dla uczniów</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>5, 11:30-12:15</td>
-        <td>Szypko Dorota</td>
-        <td>2B|t.program</td>
-        <td>Informatyka</td>
-        <td>41</td>
-        <td>Makowska Katarzyna</td>
-        <td>Za nieobecny oddział</td>
-      </tr>
-      <tr>
-        <td>6, 12:30-13:15</td>
-        <td>Brych Agnieszka</td>
-        <td>3A</td>
-        <td>Język polski</td>
-        <td>B205</td>
-        <td>Lancmańska Katarzyna</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>6, 12:30-13:15</td>
-        <td>Kocik Rafał</td>
-        <td>1A|1/2</td>
-        <td>Pracownia sieci komputerowych</td>
-        <td>42</td>
-        <td>Uczniowie zwolnieni do domu</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>6, 12:30-13:15</td>
-        <td>Renk Dorota</td>
-        <td>2A</td>
-        <td>Systemy operacyjne</td>
-        <td>43</td>
-        <td>Wojcieszak Agata</td>
-        <td>Za nieobecny oddział</td>
-      </tr>
-      <tr>
-        <td>6, 12:30-13:15</td>
-        <td>Szypko Dorota</td>
-        <td>2B|t.program</td>
-        <td>Informatyka</td>
-        <td>58</td>
-        <td>Makowska Katarzyna</td>
-        <td>Za nieobecny oddział</td>
-      </tr>
-      <tr>
-        <td>7, 13:20-14:05</td>
-        <td>Brych Agnieszka</td>
-        <td>4A</td>
-        <td>Język polski</td>
-        <td>B205</td>
-        <td>Lancmańska Katarzyna</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>7, 13:20-14:05</td>
-        <td>Kocik Rafał</td>
-        <td>1A|1/2</td>
-        <td>Pracownia sieci komputerowych</td>
-        <td>42</td>
-        <td>Uczniowie zwolnieni do domu</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>7, 13:20-14:05</td>
-        <td>Renk Dorota</td>
-        <td>2B|t.infor.</td>
-        <td>Systemy operacyjne</td>
-        <td>56</td>
-        <td>Wojcieszak Agata</td>
-        <td>Za nieobecny oddział</td>
-      </tr>
-      <tr>
-        <td>7, 13:20-14:05</td>
-        <td>Szypko Dorota</td>
-        <td>1A|2/2</td>
-        <td>Informatyka</td>
-        <td>58</td>
-        <td>Okienko dla uczniów</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>8, 14:10-14:55</td>
-        <td>Brych Agnieszka</td>
-        <td>4A</td>
-        <td>Język polski</td>
-        <td>B205</td>
-        <td>Lancmańska Katarzyna</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>8, 14:10-14:55</td>
-        <td>Kocik Rafał</td>
-        <td>3C|1/2</td>
-        <td>Pracownia sieci komputerowych</td>
-        <td>42</td>
-        <td>Uczniowie zwolnieni do domu</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>8, 14:10-14:55</td>
-        <td>Tarabasz Ewa</td>
-        <td>1B|dsd</td>
-        <td>Język niemiecki</td>
-        <td>34</td>
-        <td>Uczniowie zwolnieni do domu</td>
-        <td>Wymiana</td>
-      </tr>
-      <tr>
-        <td>8, 14:10-14:55</td>
-        <td>Tarabasz Ewa</td>
-        <td>1C|dsd</td>
-        <td>Język niemiecki</td>
-        <td>34</td>
-        <td>Uczniowie zwolnieni do domu</td>
-        <td>Wymiana</td>
-      </tr>
-      <tr>
-        <td>8, 14:10-14:55</td>
-        <td>Tarabasz Ewa</td>
-        <td>1D|dsd</td>
-        <td>Język niemiecki</td>
-        <td>34</td>
-        <td>Uczniowie zwolnieni do domu</td>
-        <td>Wymiana</td>
-      </tr>
-      <tr>
-        <td>8, 14:10-14:55</td>
-        <td>Tarabasz Ewa</td>
-        <td>1E|dsd</td>
-        <td>Język niemiecki</td>
-        <td>34</td>
-        <td>Uczniowie zwolnieni do domu</td>
-        <td>Wymiana</td>
-      </tr>
-      <tr>
-        <td>8, 14:10-14:55</td>
-        <td>Tarabasz Ewa</td>
-        <td>1A|dsd</td>
-        <td>Język niemiecki</td>
-        <td>34</td>
-        <td>Uczniowie zwolnieni do domu</td>
-        <td>Wymiana</td>
-      </tr>
-      <tr>
-        <td>9, 15:00-15:45</td>
-        <td>Kocik Rafał</td>
-        <td>3C|1/2</td>
-        <td>Pracownia sieci komputerowych</td>
-        <td>42</td>
-        <td>Uczniowie zwolnieni do domu</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>9, 15:00-15:45</td>
-        <td>Tarabasz Ewa</td>
-        <td>1B|dsd</td>
-        <td>Język niemiecki</td>
-        <td>34</td>
-        <td>Uczniowie zwolnieni do domu</td>
-        <td>Wymiana</td>
-      </tr>
-      <tr>
-        <td>9, 15:00-15:45</td>
-        <td>Tarabasz Ewa</td>
-        <td>1C|dsd</td>
-        <td>Język niemiecki</td>
-        <td>34</td>
-        <td>Uczniowie zwolnieni do domu</td>
-        <td>Wymiana</td>
-      </tr>
-      <tr>
-        <td>9, 15:00-15:45</td>
-        <td>Tarabasz Ewa</td>
-        <td>1D|dsd</td>
-        <td>Język niemiecki</td>
-        <td>34</td>
-        <td>Uczniowie zwolnieni do domu</td>
-        <td>Wymiana</td>
-      </tr>
-      <tr>
-        <td>9, 15:00-15:45</td>
-        <td>Tarabasz Ewa</td>
-        <td>1E|dsd</td>
-        <td>Język niemiecki</td>
-        <td>34</td>
-        <td>Uczniowie zwolnieni do domu</td>
-        <td>Wymiana</td>
-      </tr>
-      <tr>
-        <td>9, 15:00-15:45</td>
-        <td>Tarabasz Ewa</td>
-        <td>1A|dsd</td>
-        <td>Język niemiecki</td>
-        <td>34</td>
-        <td>Uczniowie zwolnieni do domu</td>
-        <td>Wymiana</td>
-      </tr>
-    </table>
-  </body>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			Zastępstwa
+		</title><style>
+			table, th, td { border: 1px solid black; }
+			table{ border: 1px solid black; margin-bottom: 30px; width:80%; border-collapse: collapse; table-layout:fixed; margin-left:auto; margin-right:auto; overflow-wrap: break-word; text-align: center;}
+			th { padding:5px; text-align: left; }
+			h1, h2 { text-align: center; }
+
+		</style>
+	</head><body>
+		<h1>
+			Zastępstwa
+		</h1><h2>
+			Okres: 10.06.2026 (śr.) - 10.06.2026 (śr.)
+		</h2><table>
+			<tr>
+				<th colspan="7">Dzień: 10.06.2026 (śr.)</th>
+			</tr><tr>
+				<th style="text-align: center">Lekcja</th><th style="text-align: center">Nauczyciel/wakat</th><th style="text-align: center">Oddział</th><th style="text-align: center">Przedmiot</th><th style="text-align: center">Sala</th><th style="text-align: center">Zastępca</th><th style="text-align: center">Uwagi</th>
+			</tr><tr>
+				<td>0, 07:10-07:55</td><td>Giżyński Kamil</td><td>3E|2/2</td><td>Informatyka</td><td>41</td><td>Bez konsekwencji (nieobecny oddział nauczyciela)</td><td></td>
+			</tr><tr>
+				<td>0, 07:10-07:55</td><td>Kozłowski Adam</td><td>3C|2/2</td><td>Pracownia sieci komputerowych</td><td>43</td><td>Uczniowie przychodzą później</td><td></td>
+			</tr><tr>
+				<td>1, 08:00-08:45</td><td>Giżyński Kamil</td><td>3E|2/2</td><td>Informatyka</td><td>41</td><td>Bez konsekwencji (nieobecny oddział nauczyciela)</td><td></td>
+			</tr><tr>
+				<td>1, 08:00-08:45</td><td>Kocik Rafał</td><td>3B|1/2</td><td>Pracownia systemów operacyjnych</td><td>42</td><td>Uczniowie przychodzą później</td><td></td>
+			</tr><tr>
+				<td>1, 08:00-08:45</td><td>Kozłowski Adam</td><td>3C|2/2</td><td>Pracownia sieci komputerowych</td><td>43</td><td>Uczniowie przychodzą później</td><td></td>
+			</tr><tr>
+				<td>1, 08:00-08:45</td><td>Nowak Marek</td><td>1E</td><td>Edukacja dla bezpieczeństwa</td><td>33</td><td>Uczniowie przychodzą później</td><td></td>
+			</tr><tr>
+				<td>1, 08:00-08:45</td><td>Pietrzak Artur</td><td>1D</td><td>Język polski</td><td>28</td><td>Okienko dla uczniów</td><td></td>
+			</tr><tr>
+				<td>1, 08:00-08:45</td><td>Renk Dorota</td><td>1A</td><td>Systemy operacyjne</td><td>44</td><td>Uczniowie przychodzą później</td><td></td>
+			</tr><tr>
+				<td>2, 08:50-09:35</td><td>Giżyński Kamil</td><td>3E|1/2</td><td>Informatyka</td><td>41</td><td>Bez konsekwencji (nieobecny oddział nauczyciela)</td><td></td>
+			</tr><tr>
+				<td>2, 08:50-09:35</td><td>Kocik Rafał</td><td>3B|1/2</td><td>Pracownia systemów operacyjnych</td><td>42</td><td>Uczniowie przychodzą później</td><td></td>
+			</tr><tr>
+				<td>2, 08:50-09:35</td><td>Lerczak Agata</td><td>4B|2/2</td><td>Informatyka</td><td>51</td><td>Okienko dla uczniów</td><td></td>
+			</tr><tr>
+				<td>2, 08:50-09:35</td><td>Nowak Marek</td><td>1B</td><td>Bezpieczeństwo i higiena pracy</td><td>33</td><td>Kuczewski Filip</td><td>Za nieobecny oddział</td>
+			</tr><tr>
+				<td>2, 08:50-09:35</td><td>Pietrzak Artur</td><td>1C</td><td>Język polski</td><td>28</td><td>Uczniowie przychodzą później</td><td></td>
+			</tr><tr>
+				<td>2, 08:50-09:35</td><td>Renk Dorota</td><td>1A|2/2</td><td>Pracownia systemów operacyjnych</td><td>43</td><td>Uczniowie przychodzą później</td><td></td>
+			</tr><tr>
+				<td>3, 09:50-10:35</td><td>Kocik Rafał</td><td>2A</td><td>Sieci komputerowe</td><td>44</td><td>Rozwadowska Adriana</td><td>za nieobecny oddział 3e</td>
+			</tr><tr>
+				<td>3, 09:50-10:35</td><td>Kozłowski Adam</td><td>3G|elek</td><td>Układy cyfrowe</td><td>43</td><td>Okienko dla uczniów</td><td></td>
+			</tr><tr>
+				<td>3, 09:50-10:35</td><td>Lerczak Agata</td><td>4B|2/2</td><td>Informatyka</td><td>51</td><td>Okienko dla uczniów</td><td></td>
+			</tr><tr>
+				<td>3, 09:50-10:35</td><td>Nowak Marek</td><td>1C</td><td>Bezpieczeństwo i higiena pracy</td><td>33</td><td>Uczniowie przychodzą później</td><td></td>
+			</tr><tr>
+				<td>3, 09:50-10:35</td><td>Pietrzak Artur</td><td>4C</td><td>Język polski</td><td>28</td><td>Okienko dla uczniów</td><td></td>
+			</tr><tr>
+				<td>3, 09:50-10:35</td><td>Renk Dorota</td><td>2B|t.infor.</td><td>Pracownia systemów operacyjnych</td><td>42</td><td>Okienko dla uczniów</td><td></td>
+			</tr><tr>
+				<td>4, 10:40-11:25</td><td>Giżyński Kamil</td><td>4C|1/2</td><td>Pracownia programowania aplikacji mobilnych</td><td>42</td><td>Okienko dla uczniów</td><td></td>
+			</tr><tr>
+				<td>4, 10:40-11:25</td><td>Kocik Rafał</td><td>2A</td><td>Pracownia sieci komputerowych</td><td>44</td><td>Okienko dla uczniów</td><td></td>
+			</tr><tr>
+				<td>4, 10:40-11:25</td><td>Lerczak Agata</td><td>3B|2/2</td><td>Informatyka</td><td>51</td><td>Okienko dla uczniów</td><td></td>
+			</tr><tr>
+				<td>4, 10:40-11:25</td><td>Misterski Rafał</td><td>3F|2/2</td><td>Pracownia elektryczna i elektroniczna</td><td>47</td><td>Okienko dla uczniów</td><td></td>
+			</tr><tr>
+				<td>4, 10:40-11:25</td><td>Nowak Marek</td><td>1A</td><td>Bezpieczeństwo i higiena pracy</td><td>33</td><td>Gizelska Alicja</td><td>Za nieobecny oddział</td>
+			</tr><tr>
+				<td>4, 10:40-11:25</td><td>Pietrzak Artur</td><td>4E</td><td>Język polski</td><td>28</td><td>Okienko dla uczniów</td><td></td>
+			</tr><tr>
+				<td>4, 10:40-11:25</td><td>Renk Dorota</td><td>2B|t.infor.</td><td>Pracownia systemów operacyjnych</td><td>42</td><td>Okienko dla uczniów</td><td></td>
+			</tr><tr>
+				<td>5, 11:30-12:15</td><td>Kocik Rafał</td><td>2A</td><td>Pracownia sieci komputerowych</td><td>44</td><td>Witczak Marcin</td><td>Za nieobecny oddział</td>
+			</tr><tr>
+				<td>5, 11:30-12:15</td><td>Łażewski Marek</td><td>1B</td><td>Biznes i zarządzanie</td><td>17</td><td>Piechocki Piotr</td><td>Za nieobecny oddział</td>
+			</tr><tr>
+				<td>5, 11:30-12:15</td><td>Nowak Marek</td><td>1C</td><td>Edukacja dla bezpieczeństwa</td><td>33</td><td>Okienko dla uczniów</td><td></td>
+			</tr><tr>
+				<td>5, 11:30-12:15</td><td>Renk Dorota</td><td>1A|1/2</td><td>Pracownia systemów operacyjnych</td><td>43</td><td>Okienko dla uczniów</td><td></td>
+			</tr><tr>
+				<td>5, 11:30-12:15</td><td>Szypko Dorota</td><td>2B|t.program</td><td>Informatyka</td><td>41</td><td>Makowska Katarzyna</td><td>Za nieobecny oddział</td>
+			</tr><tr>
+				<td>6, 12:30-13:15</td><td>Brych Agnieszka</td><td>3A</td><td>Język polski</td><td>B205</td><td>Lancmańska Katarzyna</td><td></td>
+			</tr><tr>
+				<td>6, 12:30-13:15</td><td>Kocik Rafał</td><td>1A|1/2</td><td>Pracownia sieci komputerowych</td><td>42</td><td>Uczniowie zwolnieni do domu</td><td></td>
+			</tr><tr>
+				<td>6, 12:30-13:15</td><td>Renk Dorota</td><td>2A</td><td>Systemy operacyjne</td><td>43</td><td>Wojcieszak Agata</td><td>Za nieobecny oddział</td>
+			</tr><tr>
+				<td>6, 12:30-13:15</td><td>Szypko Dorota</td><td>2B|t.program</td><td>Informatyka</td><td>58</td><td>Makowska Katarzyna</td><td>Za nieobecny oddział</td>
+			</tr><tr>
+				<td>7, 13:20-14:05</td><td>Brych Agnieszka</td><td>4A</td><td>Język polski</td><td>B205</td><td>Lancmańska Katarzyna</td><td></td>
+			</tr><tr>
+				<td>7, 13:20-14:05</td><td>Kocik Rafał</td><td>1A|1/2</td><td>Pracownia sieci komputerowych</td><td>42</td><td>Uczniowie zwolnieni do domu</td><td></td>
+			</tr><tr>
+				<td>7, 13:20-14:05</td><td>Renk Dorota</td><td>2B|t.infor.</td><td>Systemy operacyjne</td><td>56</td><td>Wojcieszak Agata</td><td>Za nieobecny oddział</td>
+			</tr><tr>
+				<td>7, 13:20-14:05</td><td>Szypko Dorota</td><td>1A|2/2</td><td>Informatyka</td><td>58</td><td>Okienko dla uczniów</td><td></td>
+			</tr><tr>
+				<td>8, 14:10-14:55</td><td>Brych Agnieszka</td><td>4A</td><td>Język polski</td><td>B205</td><td>Lancmańska Katarzyna</td><td></td>
+			</tr><tr>
+				<td>8, 14:10-14:55</td><td>Kocik Rafał</td><td>3C|1/2</td><td>Pracownia sieci komputerowych</td><td>42</td><td>Uczniowie zwolnieni do domu</td><td></td>
+			</tr><tr>
+				<td>8, 14:10-14:55</td><td>Tarabasz Ewa</td><td>1B|dsd</td><td>Język niemiecki</td><td>34</td><td>Uczniowie zwolnieni do domu</td><td>Wymiana</td>
+			</tr><tr>
+				<td>8, 14:10-14:55</td><td>Tarabasz Ewa</td><td>1C|dsd</td><td>Język niemiecki</td><td>34</td><td>Uczniowie zwolnieni do domu</td><td>Wymiana</td>
+			</tr><tr>
+				<td>8, 14:10-14:55</td><td>Tarabasz Ewa</td><td>1D|dsd</td><td>Język niemiecki</td><td>34</td><td>Uczniowie zwolnieni do domu</td><td>Wymiana</td>
+			</tr><tr>
+				<td>8, 14:10-14:55</td><td>Tarabasz Ewa</td><td>1E|dsd</td><td>Język niemiecki</td><td>34</td><td>Uczniowie zwolnieni do domu</td><td>Wymiana</td>
+			</tr><tr>
+				<td>8, 14:10-14:55</td><td>Tarabasz Ewa</td><td>1A|dsd</td><td>Język niemiecki</td><td>34</td><td>Uczniowie zwolnieni do domu</td><td>Wymiana</td>
+			</tr><tr>
+				<td>9, 15:00-15:45</td><td>Kocik Rafał</td><td>3C|1/2</td><td>Pracownia sieci komputerowych</td><td>42</td><td>Uczniowie zwolnieni do domu</td><td></td>
+			</tr><tr>
+				<td>9, 15:00-15:45</td><td>Tarabasz Ewa</td><td>1B|dsd</td><td>Język niemiecki</td><td>34</td><td>Uczniowie zwolnieni do domu</td><td>Wymiana</td>
+			</tr><tr>
+				<td>9, 15:00-15:45</td><td>Tarabasz Ewa</td><td>1C|dsd</td><td>Język niemiecki</td><td>34</td><td>Uczniowie zwolnieni do domu</td><td>Wymiana</td>
+			</tr><tr>
+				<td>9, 15:00-15:45</td><td>Tarabasz Ewa</td><td>1D|dsd</td><td>Język niemiecki</td><td>34</td><td>Uczniowie zwolnieni do domu</td><td>Wymiana</td>
+			</tr><tr>
+				<td>9, 15:00-15:45</td><td>Tarabasz Ewa</td><td>1E|dsd</td><td>Język niemiecki</td><td>34</td><td>Uczniowie zwolnieni do domu</td><td>Wymiana</td>
+			</tr><tr>
+				<td>9, 15:00-15:45</td><td>Tarabasz Ewa</td><td>1A|dsd</td><td>Język niemiecki</td><td>34</td><td>Uczniowie zwolnieni do domu</td><td>Wymiana</td>
+			</tr>
+		</table>
+	</body>
 </html>
