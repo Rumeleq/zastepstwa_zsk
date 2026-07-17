@@ -23,7 +23,7 @@ export function ProtectedRoute() {
   }, [apiKey])
 
   if (!apiKey || isValid === false) {
-    return <Navigate to="/admin/logowanie" replace />
+    return <Navigate to="/panel/logowanie" replace />
   }
 
   if (isValid === null) {

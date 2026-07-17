@@ -13,7 +13,7 @@ export function AdminLoginPage() {
     setError(null)
     localStorage.setItem("admin_api_key", key)
     if (await verifyApiKey()) {
-      navigate("/admin/panel")
+      navigate("/panel")
     } else {
       localStorage.removeItem("admin_api_key")
       setError("Niepoprawny klucz dostępu!")

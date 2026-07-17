@@ -21,7 +21,7 @@ export function AdminPanelPage() {
 
   function handleLogout() {
     localStorage.removeItem("admin_api_key")
-    navigate("/admin/logowanie")
+    navigate("/panel/logowanie")
   }
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -86,7 +86,7 @@ export function AdminPanelPage() {
     } catch (err: any) {
       if (err.response && err.response.status === 401) {
         localStorage.removeItem("admin_api_key")
-        navigate("/admin/logowanie", {
+        navigate("/panel/logowanie", {
           state: { error: "Klucz dostępu jest niepoprawny!" },
         })
       } else {

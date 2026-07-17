@@ -7,9 +7,9 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<SubstitutionsPage />} />
-        <Route path="/admin/logowanie" element={<AdminLoginPage />} />
+        <Route path="/panel/logowanie" element={<AdminLoginPage />} />
         <Route element={<ProtectedRoute />}>
-          <Route path="/admin/panel" element={<AdminPanelPage />} />
+          <Route path="/panel" element={<AdminPanelPage />} />
         </Route>
       </Routes>
     </Router>
