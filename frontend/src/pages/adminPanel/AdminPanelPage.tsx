@@ -82,8 +82,8 @@ export function AdminPanelPage() {
       if (fileInputRef.current) {
         fileInputRef.current.value = ""
       }
-      queryClient.invalidateQueries({ queryKey: ["globalData"] })
-    } catch (err: any) {
+      await queryClient.invalidateQueries({ queryKey: ["globalData"] })
+    } catch (err) {
       if (err.response && err.response.status === 401) {
         localStorage.removeItem("admin_api_key")
         navigate("/panel/logowanie", {

@@ -45,7 +45,7 @@ export function TeacherSelection(props: Props) {
 
             return nameA.localeCompare(nameB)
           })
-          .map(([teacherName, _]) => (
+          .map(([teacherName]) => (
             <button
               key={teacherName}
               className="teacher-btn"

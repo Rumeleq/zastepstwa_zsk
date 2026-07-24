@@ -65,7 +65,7 @@ export const verifyApiKey = async () => {
       },
     )
     return res.status === 200
-  } catch (error) {
+  } catch {
     return false
   }
 }
