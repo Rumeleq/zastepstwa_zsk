@@ -15,7 +15,7 @@
     "api": "npm run dev -w backend/api"
   },
   "devDependencies": {
-    "concurrently": "^9.2.4",
+    "concurrently": "^10.0.5",
     "prettier": "^3.9.6"
   }
 }
